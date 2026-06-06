@@ -5,12 +5,14 @@ const config = require('./conf/config');
 const db = require('./conf/db');
 const alumnoR = require('./routes/alumnoR');
 const profesorR = require('./routes/profesorR');
+const vehiculoR = require('./routes/vehiculoR');
 
 const app = express();
 
 app.use(express.json());
 app.use('/alumnos', alumnoR);
 app.use('/profesores', profesorR);
+app.use('/vehiculos', vehiculoR);
 
 app.get('/', (req, res) => {
     res.json({mensaje: 'porfa funciona', version: '1.0.0'});
