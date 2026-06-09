@@ -1,27 +1,37 @@
-const {EntitySchema} = require("typeorm");
+const { EntitySchema } = require("typeorm");
 
 module.exports = new EntitySchema({
-    name: "Inscripcion",
-    tableName: "inscripciones",
-    columns: {
-        alumnoId: {
-            primary: true,
-            type: "int"
-        },
-        profesorId: {
-            type: "int"
-        },
-    },
-    relations: {
-        alumno: {
-            type: "many-to-one",
-            target: "Alumno",
-            joinColumn: { name: "alumnoId" },
-        },
-        profesor: {
-            type: "many-to-one",
-            target: "Profesor",
-            joinColumn: { name: "profesorId" },
-        },
-    },
+	name: "Inscripcion",
+	tableName: "inscripciones",
+	columns: {
+		id: {
+			primary: true,
+			type: "int",
+			generated: "increment",
+		},
+		cursoId: {
+			type: "int",
+			nullable: false,
+		},
+		alumnoId: {
+			type: "int",
+			nullable: false,
+		},
+		fechaInscripcion: {
+			type: "date",
+			default: () => "CURRENT_DATE",
+		},
+	},
+	relations: {
+		curso: {
+			type: "many-to-one",
+			target: "Curso",
+			joinColumn: { name: "cursoId" },
+		},
+		alumno: {
+			type: "many-to-one",
+			target: "Alumno",
+			joinColumn: { name: "alumnoId" },
+		},
+	},
 });

@@ -12,6 +12,7 @@ const alumnoSchema = Joi.object({
 });
 
 const updateAlumnoSchema = Joi.object({
+    rut: Joi.string() .alphanum() .min(9) .max(10) .optional(),
     nombre: Joi.string() .alphanum() .min(3) .max(30) .optional(),
     apellido: Joi.string() .alphanum() .min(3) .max(30) .optional()
 }).min(1);
