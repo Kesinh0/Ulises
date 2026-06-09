@@ -15,7 +15,6 @@ const profesorSchema = Joi.object({
 });
 
 const updateProfesorSchema = Joi.object({
-    rut: Joi.string() .alphanum() .min(9) .max(10) .optional(),
     nombre: Joi.string() .alphanum() .min(3) .max(30) .optional(),
     apellido: Joi.string() .alphanum() .min(3) .max(30) .optional(),
     categoria: Joi.string() .alphanum() .min(5) .max(30) .optional()

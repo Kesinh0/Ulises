@@ -1,6 +1,6 @@
 const { sendSuccess, sendError } = require("../handlers/responseHandler");
 const { vehiculoSchema, updateVehiculoSchema } = require("../validation/vehiculoV");
-const vehiculoService = require("../services/vehiculoService");
+const vehiculoService = require("../service/vehiculoService");
 
 const crearVehiculo = async (req, res) => {
     try {
