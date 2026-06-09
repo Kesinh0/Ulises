@@ -1,4 +1,4 @@
-const { sendsuccess, senderror } = require("../helpers/response");
+const { sendSuccess, sendError } = require("../handlers/responseHandler");
 const { vehiculoSchema, updateVehiculoSchema } = require("../validation/vehiculoV");
 const vehiculoService = require("../services/vehiculoService");
 
