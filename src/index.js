@@ -5,7 +5,7 @@ const config = require("./conf/config");
 const db = require("./conf/db");
 const alumnoR = require("./routes/alumnoR");
 const profesorR = require("./routes/profesorR");
-// const vehiculoR = require("./routes/vehiculoR");
+const vehiculoR = require("./routes/vehiculoR");
 const horarioR = require("./routes/horarioR");
 const cursoR = require("./routes/cursoR");
 
@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 app.use("/alumnos", alumnoR);
 app.use("/profesores", profesorR);
-// app.use("/vehiculos", vehiculoR);
+app.use("/vehiculos", vehiculoR);
 app.use("/horarios", horarioR);
 app.use("/cursos", cursoR);
 

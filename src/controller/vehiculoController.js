@@ -1,6 +1,6 @@
 const { sendSuccess, sendError } = require("../handlers/responseHandler");
 const { vehiculoSchema, updateVehiculoSchema } = require("../validation/vehiculoV");
-const vehiculoService = require("../services/vehiculoService");
+const vehiculoService = require("../service/vehiculoService");
 
 const crearVehiculo = async (req, res) => {
     try {
@@ -42,6 +42,8 @@ const obtenerVehiculoPorId = async (req, res) => {
     }
 }
 
+
+//revisar para que no cree otro vehiculo
 const actualizarVehiculo = async (req, res) => {
     try {
         const { id } = req.params;
