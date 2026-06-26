@@ -14,7 +14,6 @@ const vehiculoSchema = Joi.object({
 });
 
 const updateVehiculoSchema = Joi.object({
-    id: Joi.number() .integer() .min(1) .optional(),
     marca: Joi.string() .alphanum() .min(3) .max(30) .optional(),
     modelo: Joi.string() .alphanum() .min(3) .max(30) .optional(),
     anio: Joi.number() .integer() .min(1886) .max(new Date().getFullYear()) .optional(),
