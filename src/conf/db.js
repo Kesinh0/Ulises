@@ -2,6 +2,7 @@ const { DataSource } = require("typeorm");
 require("dotenv").config();
 const alumnoE = require("../entities/alumnoE");
 const profesorE = require("../entities/profesorE");
+const usuarioE = require("../entities/usuarioE");
 const vehiculoE = require("../entities/vehiculoE");
 const horarioE = require("../entities/horarioE");
 const cursoE = require("../entities/cursoE");
@@ -18,7 +19,17 @@ const AppDataSource = new DataSource({
 	database: process.env.DB_NAME || "req",
 	synchronize: true,
 	logging: false,
-	entities: [alumnoE, profesorE, vehiculoE, horarioE, cursoE, inscripcionE, tareaE, calificacionE],
+	entities: [
+		alumnoE,
+		profesorE,
+		vehiculoE,
+		horarioE,
+		cursoE,
+		inscripcionE,
+		tareaE,
+		calificacionE,
+		usuarioE,
+	],
 });
 
 module.exports = AppDataSource;
