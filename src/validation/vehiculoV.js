@@ -22,3 +22,4 @@ const updateVehiculoSchema = Joi.object({
 }).min(1);
 
 module.exports = { vehiculoSchema, updateVehiculoSchema };
+//hola
