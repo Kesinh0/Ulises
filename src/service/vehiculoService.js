@@ -17,7 +17,7 @@ const obtenerVehiculoPorId = async (id) => {
 }
 
 const actualizarVehiculo = async (id, vehiculoData) => {
-    const vehiculo = obtenerVehiculoPorId(id);
+    const vehiculo = await obtenerVehiculoPorId(id);
     if (!vehiculo) {
         throw new Error('Vehiculo no encontrado');
     }
@@ -26,7 +26,7 @@ const actualizarVehiculo = async (id, vehiculoData) => {
 }   
 
 const eliminarVehiculo = async (id) => {
-    const vehiculo = obtenerVehiculoPorId(id);
+    const vehiculo = await obtenerVehiculoPorId(id);
     if (!vehiculo) {
         throw new Error('Vehiculo no encontrado');
     }   
