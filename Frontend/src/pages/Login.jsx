@@ -12,13 +12,15 @@ function App() {
         <div class="forms">
             <div class="Login">
                 <h1 class="Mensaje-bienvenida">Bienvenido a tu escuela de manejo</h1>
-                <p class="Descripcion-login">Ingresa los detalles de tu cuenta</p>
+                <p class="Descripcion-login">Ingrese los detalles de tu cuenta</p>
                 <form action="">
                     <div class="input-container">
-                        <input type="text" placeholder="correo o usuario" />
-                        <input type="password" placeholder="Contraseña" />
+                        <label for="username">Correo o Usuario</label>
+                        <input type="text" placeholder="Ingresa tu usuario" name="username"/>
+                        <label for="password">Contraseña</label>
+                        <input type="password" placeholder="Ingresa tu contraseña" name="password"/>
                     </div>
-                    <button>Iniciar Sesion</button>
+                    <button onclick="handleLogin()">Iniciar Sesion</button>
                 </form>
             </div>   
         </div>
