@@ -1,21 +1,15 @@
 const { verificarToken } = require("../service/authService");
+const extraerSesion = require("../utils/extraerSesion");
 
 const verificarAuth = async (req, res, next) => {
-	const authHeader = req.headers.authorization;
+  const usuario = await extraerSesion(req);
 
-	if (!authHeader || !authHeader.startsWith("Bearer ")) {
-		return res.status(401).json({ mensaje: "Token no proporcionado" });
-	}
+  if (!usuario) {
+    return res.status(401).json({ message: "No autorizado" });
+  }
 
-	const token = authHeader.split(" ")[1];
-
-	try {
-		const usuario = await verificarToken(token);
-		req.usuario = usuario; // Agregar el usuario al objeto de solicitud
-		next();
-	} catch (error) {
-		return res.status(401).json({ mensaje: "Token inválido" });
-	}
+  req.usuario = usuario; // Agrega el usuario al objeto de la solicitud
+  next();
 };
 
 module.exports = verificarAuth;
