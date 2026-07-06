@@ -28,4 +28,13 @@ async function crearUsuario(req, res) {
 	}
 }
 
-module.exports = { crearUsuario };
+const obtenerPerfil = async (req, res) => {
+	try {
+		const usuario = req.usuario; // El usuario autenticado se encuentra en req.usuario
+		sendSuccess(res, usuario, "Perfil obtenido exitosamente", 200);
+	} catch (error) {
+		sendError(res, "Error al obtener el perfil", 500);
+	}
+};
+
+module.exports = { crearUsuario, obtenerPerfil };
