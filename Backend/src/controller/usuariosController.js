@@ -37,4 +37,39 @@ const obtenerPerfil = async (req, res) => {
 	}
 };
 
-module.exports = { crearUsuario, obtenerPerfil };
+const actualizarUsuario = async (req, res) => {
+	try {
+		const { error } = updateUsuarioSchema.validate(req.body);
+
+		if (error) {
+			return sendError(
+				res,
+				"Datos de usuario inválidos",
+				400,
+				error.details[0].message,
+			);
+		}
+
+		const usuarioId = req.usuario.id; // Obtener el ID del usuario autenticado
+
+		const usuarioActualizado = await usuarioService.actualizarUsuario(
+			usuarioId,
+			req.body,
+		);
+
+		if (!usuarioActualizado) {
+			return sendError(res, "Usuario no encontrado", 404);
+		}
+
+		sendSuccess(
+			res,
+			usuarioActualizado,
+			"Usuario actualizado exitosamente",
+			200,
+		);
+	} catch (error) {
+		sendError(res, "Error al actualizar el usuario", 500);
+	}
+};
+
+module.exports = { crearUsuario, obtenerPerfil, actualizarUsuario };

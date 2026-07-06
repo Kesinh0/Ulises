@@ -9,4 +9,7 @@ router.get("/perfil", verificarAuth, usuarioController.obtenerPerfil);
 //crear un usuario
 router.post("/", usuarioController.crearUsuario);
 
+//actualizar un usuario
+router.put("/perfil", verificarAuth, usuarioController.actualizarUsuario);
+
 module.exports = router;
