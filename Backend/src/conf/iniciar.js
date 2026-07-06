@@ -7,6 +7,9 @@ const vehiculo = require("../entities/vehiculoE");
 const initialSetup = async () => {
 	try {
 		await AppDataSource.initialize();
+
+		await AppDataSource.query('CREATE EXTENSION IF NOT EXISTS "citext";');
+
 		console.log("se conecta");
 		await AppDataSource.synchronize(true);
 		console.log("se sincroniza");

@@ -15,8 +15,7 @@ module.exports = new EntitySchema({
 			nullable: false,
 		},
 		correo: {
-			type: "varchar",
-			length: 50,
+			type: "citext",
 			nullable: false,
 			unique: true,
 		},
