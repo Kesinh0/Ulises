@@ -1,5 +1,6 @@
-
+import { useNavigate } from "react-router-dom";
 const Profesor = () => {
+    const navigate = useNavigate();
     return (
         <div>
             <h1>
@@ -16,6 +17,7 @@ const Profesor = () => {
 
             {/*Apartado de curso*/}
             {/*ve a los alumnos que tienen registrada su clase, puede modificar su calificación y ingresar tareas*/}
+            <button onClick={() => navigate("/")}>Volver al inicio</button>
         </div>
     )
 }

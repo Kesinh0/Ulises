@@ -1,18 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from 'react'
-import reactLogo from '../assets/react.svg'
-import viteLogo from '../assets/vite.svg'
-import heroImg from '../assets/hero.png'
-import '../styles/App.css'
+
 
 function Login() {
+  const navigate = useNavigate();
 
   return ( 
     <>
     <div class="right" id="right">
         <div class="forms">
             <div class="Login">
-                <h1 class="Mensaje-bienvenida">Bienvenido a tu escuela de manejo</h1>
-                <p class="Descripcion-login">Ingrese los detalles de tu cuenta</p>
                 <form action="">
                     <div class="input-container">
                         <label for="username">Correo o Usuario</label>
@@ -24,6 +21,7 @@ function Login() {
                     <button onclick="handleLogin()">Iniciar Sesion</button> 
                   {/*ESTE BOTON DEBE LLEVARNOS A LA PAGINA DEL ESTUDIANTE O PROFESOR DEPENDIENDO DEL TIPO DE USUARIO*/}
                 </form>
+                <button onClick={() => navigate("/")}>Volver al inicio</button>
             </div>   
         </div>
       </div>

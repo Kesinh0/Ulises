@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom";
 const Registro = () => {
+    const navigate = useNavigate();
     return (
         <div className="registro-container">
             <h1>Registro</h1>
@@ -12,6 +14,7 @@ const Registro = () => {
                 </div>
                 <button type="submit">Registrarse</button>
             </form>
+            <button onClick={() => navigate("/")}>Volver al inicio</button>
         </div>
     );
 }
