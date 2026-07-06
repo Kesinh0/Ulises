@@ -4,7 +4,7 @@ import viteLogo from '../assets/vite.svg'
 import heroImg from '../assets/hero.png'
 import '../styles/App.css'
 
-function App() {
+function Login() {
 
   return ( 
     <>
@@ -20,7 +20,7 @@ function App() {
                         <label for="password">Contraseña</label>
                         <input type="password" placeholder="Ingresa tu contraseña" name="password"/>
                     </div>
-                    <button onclick="handleLogin()">Iniciar Sesion</button>
+                    <button onclick="handleLogin()">Iniciar Sesion</button> // Agrega el evento onClick al botón
                 </form>
             </div>   
         </div>
@@ -29,4 +29,4 @@ function App() {
   )
 }
 
-export default App
+export default Login
