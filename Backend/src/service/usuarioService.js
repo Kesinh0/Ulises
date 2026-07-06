@@ -42,7 +42,7 @@ async function obtenerUsuarioPorCorreo(correo) {
 		return null; // No se encontró el usuario con el correo proporcionado
 	}
 
-	return cleanUser(usuario);
+	return usuario;
 }
 
 //obtener un usuario por id
