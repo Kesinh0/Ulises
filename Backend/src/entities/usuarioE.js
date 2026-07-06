@@ -9,10 +9,15 @@ module.exports = new EntitySchema({
 			type: "int",
 			generated: "increment",
 		},
-		correo: {
+		nombre: {
 			type: "varchar",
 			length: 50,
 			nullable: false,
+		},
+		correo: {
+			type: "citext",
+			nullable: false,
+			unique: true,
 		},
 		contrasenaHash: {
 			type: "varchar",
