@@ -12,7 +12,8 @@ const Registro = () => {
                     <label htmlFor="password">Contraseña</label>
                     <input type="password" placeholder="Ingresa tu contraseña" name="password" />
                 </div>
-                <button type="submit">Registrarse</button>
+                {/* el botón de registrarse debe mandar la informacion a la base de datos */}
+                <button onClick={() => navigate("/")} type="submit">Registrarse</button>
             </form>
             <button onClick={() => navigate("/")}>Volver al inicio</button>
         </div>
