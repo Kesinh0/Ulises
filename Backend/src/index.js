@@ -9,6 +9,7 @@ const vehiculoR = require("./routes/vehiculoR");
 const horarioR = require("./routes/horarioR");
 const cursoR = require("./routes/cursoR");
 const usuarioR = require("./routes/usuarioR");
+const authR = require("./routes/authR");
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use("/vehiculos", vehiculoR);
 app.use("/horarios", horarioR);
 app.use("/cursos", cursoR);
 app.use("/usuarios", usuarioR);
+app.use("/auth", authR);
 
 app.get("/", (req, res) => {
 	res.json({ mensaje: "porfa funciona", version: "1.0.0" });
