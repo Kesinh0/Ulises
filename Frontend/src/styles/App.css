@@ -12,7 +12,32 @@ body{
     height: 100vh;
     display: grid;
     place-content: center;
-    background-color: var(--color-gray-light);
+    background-color: #1f1b24;
+    background-size:cover;
+    color: white;
+}
+
+ol.terminos-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+li.terminos-list-item {
+  width: 150px;
+  flex: 0 0 150px;
+}
+
+.container,
+.terminos-container,
+.forms,
+.Login,
+.right,
+.left {
+    background-color: #332940;
+    color: white;
 }
 .left{
     width: 100%;
@@ -21,7 +46,7 @@ body{
 
 .right{
     padding: 1em;
-    border: 4px solid black;
+    border: 1px solid #4a3d5c;
     width: 100%;
     height: 100%;
 }
@@ -38,6 +63,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #332940;
     height: 100%;
     width: 100%;
 }
@@ -91,6 +117,18 @@ body{
     border-bottom: 2px solid var(--color-black);
     flex: 1;
     margin: 0 0.6rem;
+}
+
+.Login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.Login .volver-inicio {
+    display: block;
+    margin: 0 auto;
 }
 
 form,

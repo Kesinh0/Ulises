@@ -8,6 +8,7 @@ import Estudiante from './pages/Estudiante.jsx';
 import Profesor from './pages/Profesor.jsx';
 import Home from './pages/Home.jsx';
 import Registro from './pages/Registro.jsx';
+import Terminos from './pages/terminos.jsx';
 import './styles/App.css' 
 //AGREGAR DECORACION AL FINAL
 
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/profesor",
         element: <Profesor />
+      },
+      {
+        path: "/terminos",
+        element: <Terminos />
       }
     ]
   }

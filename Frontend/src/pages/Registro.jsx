@@ -11,6 +11,12 @@ const Registro = () => {
                     <input type="email" placeholder="Ingresa tu correo electrónico" name="email" />
                     <label htmlFor="password">Contraseña</label>
                     <input type="password" placeholder="Ingresa tu contraseña" name="password" />
+                    <label htmlFor="confirm-password">Confirmar contraseña</label>
+                    <input type="password" placeholder="Confirma tu contraseña" name="confirm-password" />
+                    <label>
+                        <input type="checkbox" name="terms" required />
+                        Acepto los <a href="/terminos" target="_blank"> términos y condiciones</a>
+                    </label>
                 </div>
                 {/* el botón de registrarse debe mandar la informacion a la base de datos */}
                 <button onClick={() => navigate("/")} type="submit">Registrarse</button>
