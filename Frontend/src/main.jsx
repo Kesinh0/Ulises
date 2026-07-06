@@ -8,7 +8,10 @@ import Estudiante from './pages/Estudiante.jsx';
 import Profesor from './pages/Profesor.jsx';
 import Home from './pages/Home.jsx';
 import Registro from './pages/Registro.jsx';
-//import './styles/App.css'
+//import './styles/App.css' 
+//agregar el css de la app para que se vea bonito CUANDO LO IMPLEMENTEMOS
+
+{/*HAY QUE IMPLEMENTAR DE QUE NO TE DEJE METERTE A LAS OTRAS PAGINAS SI NO ESTAS LOGUEADO*/}
 
 const router = createBrowserRouter([
   {
