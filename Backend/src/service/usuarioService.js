@@ -56,6 +56,33 @@ async function obtenerUsuarioPorId(id) {
 	return cleanUser(usuario);
 }
 
+async function obtenerAlumnoPorId(id) {
+	const usuario = await usuarioRepository.findOneBy({ id, rol: "alumno" });
+
+	if (!usuario) {
+		return null; // No se encontró el usuario con el id proporcionado
+	}
+
+	return cleanUser(usuario);
+}
+
+async function obtenerProfesorPorId(id) {
+	const usuario = await usuarioRepository.findOneBy({ id, rol: "profesor" });
+
+	if (!usuario) {
+		return null; // No se encontró el usuario con el id proporcionado
+	}
+
+	return cleanUser(usuario);
+}
+
+//obtener todos los usuarios
+async function obtenerUsuarios() {
+	const usuarios = await usuarioRepository.find();
+
+	return usuarios.map((usuario) => cleanUser(usuario));
+}
+
 //actualizar un usuario por id
 async function actualizarUsuario(id, usuarioData) {
 	if (usuarioData.contrasena) {

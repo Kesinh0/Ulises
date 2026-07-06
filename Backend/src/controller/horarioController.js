@@ -6,7 +6,7 @@ const {
 	actualizarHorario,
 	eliminarHorario,
 } = require("../service/horarioService");
-const { obtenerProfesorPorId } = require("../service/profesorService");
+const { obtenerProfesorPorId } = require("../service/usuarioService");
 const {
 	horarioSchema,
 	updateHorarioSchema,

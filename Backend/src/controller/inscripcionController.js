@@ -1,8 +1,8 @@
 const {sendSuccess, sendError} = require('../handlers/responseHandler');
 const inscripcionService = require('../service/inscripcionService');
 const {inscripcionSchema,updateInscripcionSchema} = require('../validation/inscripcionV');
-const {obtenerAlumnoPorId} = require('../service/alumnoService');
-const {obtenerProfesorPorId} = require('../service/profesorService');
+const {obtenerAlumnoPorId} = require('../service/usuarioService');
+const {obtenerProfesorPorId} = require('../service/usuarioService');
 
 const crearInscripcion = async (req,res) => {
     try{

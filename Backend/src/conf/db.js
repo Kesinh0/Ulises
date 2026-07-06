@@ -1,7 +1,5 @@
 const { DataSource } = require("typeorm");
 require("dotenv").config();
-const alumnoE = require("../entities/alumnoE");
-const profesorE = require("../entities/profesorE");
 const usuarioE = require("../entities/usuarioE");
 const vehiculoE = require("../entities/vehiculoE");
 const horarioE = require("../entities/horarioE");
@@ -15,13 +13,11 @@ const AppDataSource = new DataSource({
 	host: process.env.DB_HOST || "localhost",
 	port: parseInt(process.env.DB_PORT || "5432"),
 	username: process.env.DB_USER || "postgres",
-	password: process.env.DB_PASSWORD || "DarkFlame555-",
+	password: process.env.DB_PASSWORD || "2911",
 	database: process.env.DB_NAME || "req",
 	synchronize: true,
 	logging: false,
 	entities: [
-		alumnoE,
-		profesorE,
 		vehiculoE,
 		horarioE,
 		cursoE,
