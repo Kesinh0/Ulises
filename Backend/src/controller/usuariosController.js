@@ -72,4 +72,25 @@ const actualizarUsuario = async (req, res) => {
 	}
 };
 
-module.exports = { crearUsuario, obtenerPerfil, actualizarUsuario };
+const eliminarUsuario = async (req, res) => {
+	try {
+		const usuarioId = req.usuario.id; // Obtener el ID del usuario autenticado
+
+		const eliminado = await usuarioService.eliminarUsuario(usuarioId);
+
+		if (!eliminado) {
+			return sendError(res, "Usuario no encontrado", 404);
+		}
+
+		sendSuccess(res, null, "Usuario eliminado exitosamente", 200);
+	} catch (error) {
+		sendError(res, "Error al eliminar el usuario", 500);
+	}
+};
+
+module.exports = {
+	crearUsuario,
+	obtenerPerfil,
+	actualizarUsuario,
+	eliminarUsuario,
+};

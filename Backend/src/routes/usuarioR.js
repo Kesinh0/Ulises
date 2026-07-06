@@ -12,4 +12,7 @@ router.post("/", usuarioController.crearUsuario);
 //actualizar un usuario
 router.put("/perfil", verificarAuth, usuarioController.actualizarUsuario);
 
+//eliminar un usuario
+router.delete("/perfil", verificarAuth, usuarioController.eliminarUsuario);
+
 module.exports = router;
