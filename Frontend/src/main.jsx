@@ -9,6 +9,7 @@ import Profesor from './pages/Profesor.jsx';
 import Home from './pages/Home.jsx';
 import Registro from './pages/Registro.jsx';
 import Terminos from './pages/terminos.jsx';
+import Admin from './pages/Administracion.jsx';
 import './styles/App.css' 
 //AGREGAR DECORACION AL FINAL
 
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/terminos",
         element: <Terminos />
+      },
+      {
+        path: "/Admin",
+        element: <Admin />
       }
     ]
   }
