@@ -169,8 +169,14 @@ li.terminos-list-item {
     margin-bottom: 3rem;
 }
 
-
-
+.register-image{
+    display: block;
+    width: 70%;
+    margin: 0 auto 0;
+    height: auto;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
 
 .left{
     width: 100%;

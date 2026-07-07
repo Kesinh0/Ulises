@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
+import register from "../assets/Register.png"
+
 const Registro = () => {
     const navigate = useNavigate();
     return (
         <div className="right" id="right">
             <div className="registro-container">
-                <h1>Registro</h1>
-                <p><br/></p>
-                <p>Registrate usando tu correo electrónico.</p>
-                <p><br/></p>
+                <h1>Registracion</h1>
+                <img src={register} alt="register" className="register-image"/>
                 <form>
                     <div className="input-container">
                         <label htmlFor="email">Correo electrónico</label>
