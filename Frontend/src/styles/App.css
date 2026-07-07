@@ -161,6 +161,15 @@ li.terminos-list-item {
 }
 
 
+.login-image{
+    display: block;
+    width: 50%;
+    margin: 0 auto 0;
+    height: auto;
+    margin-bottom: 3rem;
+}
+
+
 
 
 .left{
@@ -175,11 +184,20 @@ li.terminos-list-item {
     height: 100%;
 }
 
+.right h1{
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+    text-align: center;
+}
+
 .right .top a{
     color: var(--color-black);
     font-size: 0.7rem;
     font-weight: 500;
 }
+
+
 
 /*forms*/
 

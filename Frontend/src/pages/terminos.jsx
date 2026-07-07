@@ -4,7 +4,11 @@ const Terminos = () => {
         <div className="right" id="right"> 
             <div className="terminos-container">
                 <h1>Términos y Condiciones</h1>
-                <p>Bienvenido a nuestra aplicación de escuela de manejo. <br /> Antes de utilizar nuestros servicios, por favor lea atentamente<br />los siguientes términos y condiciones:</p>
+                <p>
+                <br /> Bienvenido a nuestra aplicación de escuela de manejo. 
+                <br /> Antes de utilizar nuestros servicios, por favor lea atentamente
+                <br />los siguientes términos y condiciones:
+                </p>
                 
                 <ol className="terminos-list">
                     <li className="terminos-list-item">

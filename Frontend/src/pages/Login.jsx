@@ -1,20 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react'
-
+import login from '../assets/login.png';
 
 function Login() {
   const navigate = useNavigate();
 
   return ( 
     <div className="right" id="right">
+        <h1>Iniciar Sesión</h1>
+        <p><br /></p>
         <div className="Login">
-            <h1>Iniciar Sesión</h1>
+            <img src={login} alt="login" className="login-image" />
             <p>Bienvenido nuevamente a Ulises.</p>
             <form>
                 <div className="input-container">
-                    <label htmlFor="email">Correo de usuario</label>
+                    <label htmlFor="email"><br />Correo de usuario</label>
                     <input type="email" placeholder="Ingresa tu correo" name="email"/>
-                    <label htmlFor="password">Contraseña</label>
+                    <label htmlFor="password"><br />Contraseña</label>
                     <input type="password" placeholder="Ingresa tu contraseña" name="password"/>
                     <label><br/></label>
                 {/*IMPLEMENTAR QUE SE GUARDEN ESTOS DATOS*/}

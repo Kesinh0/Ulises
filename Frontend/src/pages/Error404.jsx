@@ -14,7 +14,7 @@ const Error404 = () => {
       <p>
         <br/> 
         La página que estás buscando no existe, 
-        aveces hay que dejar ir de las cosas 
+        a veces hay que dejar ir de las cosas 
         que no podemos controlar.
         <br/>
         <br/> 
