@@ -1,9 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react'
 import login from '../assets/login.png';
+import { login } from '../services/authService.js';
 
 function Login() {
   const navigate = useNavigate();
+  const [correo, setCorreo] = useState('');
+  const [contrasena, setContrasena] = useState('');
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Correo:', correo);
+    console.log('Contraseña:', contrasena);
+  };
 
   return ( 
     <div className="right" id="right">
@@ -12,18 +21,19 @@ function Login() {
         <div className="Login">
             <img src={login} alt="login" className="login-image" />
             <p>Bienvenido nuevamente a Ulises.</p>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="input-container">
                     <label htmlFor="email"><br />Correo de usuario</label>
-                    <input type="email" placeholder="Ingresa tu correo" name="email"/>
+                    <input type="email" 
+                    placeholder="Ingresa tu correo" name="email" value={correo} onChange={(e) => setCorreo(e.target.value)}/>
                     <label htmlFor="password"><br />Contraseña</label>
-                    <input type="password" placeholder="Ingresa tu contraseña" name="password"/>
+                    <input type="password" placeholder="Ingresa tu contraseña" name="password" value={contrasena} onChange={(e) => setContrasena(e.target.value)}/>
                     <label><br/></label>
                 {/*IMPLEMENTAR QUE SE GUARDEN ESTOS DATOS*/}
                 </div>
-                <button onClick={() => handleLogin()}>Iniciar Sesion</button> 
+                <button onClick={handleSubmit}>Iniciar Sesion</button> 
               {/*ESTE BOTON DEBE LLEVARNOS A LA PAGINA DEL ESTUDIANTE O PROFESOR DEPENDIENDO DEL TIPO DE USUARIO*/}
-                <button onClick={() => navigate("/")}>Volver al inicio</button>
+                <button onClick={() => login({email: correo, password: contrasena})}>Volver al inicio</button>
                 <p><br/></p>
             </form>
         </div>   
