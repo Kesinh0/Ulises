@@ -4,6 +4,7 @@ const {
 	usuarioSchema,
 	updateUsuarioSchema,
 } = require("../validation/usuarioV");
+const extraerSesion = require("../utils/extraerSesion");
 
 //crear un usuario
 async function crearUsuario(req, res) {
@@ -16,6 +17,18 @@ async function crearUsuario(req, res) {
 				400,
 				error.details[0].message,
 			);
+		}
+
+		if (req.body.rol === "admin" || req.body.rol === "profesor") {
+			const usuario = await extraerSesion(req);
+
+			if (!usuario || usuario.rol !== "admin") {
+				return sendError(
+					res,
+					"Solo un administrador puede crear usuarios con rol 'admin' o 'profesor'",
+					403,
+				);
+			}
 		}
 
 		const nuevoUsuario = await usuarioService.crearUsuario(req.body);
@@ -35,7 +48,7 @@ const obtenerUsuarios = async (req, res) => {
 	} catch (error) {
 		sendError(res, "Error al obtener los usuarios", 500);
 	}
-}
+};
 
 const obtenerUsuarioPorId = async (req, res) => {
 	try {
@@ -48,7 +61,7 @@ const obtenerUsuarioPorId = async (req, res) => {
 	} catch (error) {
 		sendError(res, "Error al obtener el usuario", 500);
 	}
-}
+};
 
 const obtenerAlumnoPorId = async (req, res) => {
 	try {
@@ -61,7 +74,7 @@ const obtenerAlumnoPorId = async (req, res) => {
 	} catch (error) {
 		sendError(res, "Error al obtener el usuario", 500);
 	}
-}
+};
 
 const obtenerProfesorPorId = async (req, res) => {
 	try {
