@@ -1,6 +1,9 @@
 require("reflect-metadata");
+const bcrypt = require("bcrypt");
+
 const AppDataSource = require("./db");
 const vehiculo = require("../entities/vehiculoE");
+const usuario = require("../entities/usuarioE");
 
 const initialSetup = async () => {
 	try {
@@ -31,6 +34,19 @@ const initialSetup = async () => {
 			});
 			await vehiculoRepo.save([vehiculo1, vehiculo2]);
 			console.log("Vehículos hechos");
+
+			const adminPassword = "admin123";
+			const hashedPassword = await bcrypt.hash(adminPassword, 10);
+
+			const usuarioRepo = AppDataSource.getRepository(usuario);
+			const adminUsuario = usuarioRepo.create({
+				nombre: "Admin",
+				correo: "admin@example.com",
+				contrasenaHash: hashedPassword,
+				rol: "admin",
+			});
+			await usuarioRepo.save([adminUsuario]);
+			console.log("Usuario admin creado");
 		}
 		console.log("exito");
 		process.exit(0);
