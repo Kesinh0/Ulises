@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import register from "../assets/Register.png"
+import registerimg from "../assets/Register.png"
 import { useState } from 'react';
 import { register } from '../services/authService.js';
-import '../styles/Registro.css';
 
 const Registro = () => {
     const navigate = useNavigate();
@@ -10,14 +9,14 @@ const Registro = () => {
     const [contrasena, setContrasena] = useState('');
     const [confirmarContrasena, setConfirmarContrasena] = useState('');
 
-    handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
     };
     return (
         <div className="right" id="right">
             <div className="registro-container">
                 <h1>Registro</h1>
-                <img src={register} alt="register" className="register-image"/>
+                <img src={registerimg} alt="registerimg" className="register-image"/>
                 <form>
                     <div className="input-container">
                         <label htmlFor="email">Correo electrónico</label>

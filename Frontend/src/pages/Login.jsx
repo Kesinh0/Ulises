@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react'
-import login from '../assets/login.png';
+import loginimg from '../assets/Login.png';
 import { login } from '../services/authService.js';
 
 function Login() {
@@ -19,7 +19,7 @@ function Login() {
         <h1>Iniciar Sesión</h1>
         <p><br /></p>
         <div className="Login">
-            <img src={login} alt="login" className="login-image" />
+            <img src={loginimg} alt="loginimg" className="login-image" />
             <p>Bienvenido nuevamente a Ulises.</p>
             <form onSubmit={handleSubmit}>
                 <div className="input-container">
@@ -30,6 +30,7 @@ function Login() {
                     <input type="password" placeholder="Ingresa tu contraseña" name="password" value={contrasena} onChange={(e) => setContrasena(e.target.value)}/>
                     <label><br/></label>
                 {/*IMPLEMENTAR QUE SE GUARDEN ESTOS DATOS*/}
+                
                 </div>
                 <button onClick={handleSubmit}>Iniciar Sesion</button> 
               {/*ESTE BOTON DEBE LLEVARNOS A LA PAGINA DEL ESTUDIANTE O PROFESOR DEPENDIENDO DEL TIPO DE USUARIO*/}

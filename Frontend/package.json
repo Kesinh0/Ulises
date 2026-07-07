@@ -12,7 +12,10 @@
   "dependencies": {
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "react-router-dom": "^7.18.1"
+    "react-router-dom": "^7.18.1",
+    "js-cookie": "^3.0.5",
+    "jwt-decode": "^4.0.0",
+    "axios": "^1.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.29.7",

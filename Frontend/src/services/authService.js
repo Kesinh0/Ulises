@@ -1,4 +1,4 @@
-import axios from './root.service.js';
+import axios from './rootService.js';
 import cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 
