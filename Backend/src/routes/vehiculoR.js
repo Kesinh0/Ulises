@@ -1,20 +1,33 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const vehiculoController = require('../controller/vehiculoController');
+const vehiculoController = require("../controller/vehiculoController");
+const verificarRol = require("../middlewares/verificarRol");
 
 //crear vehiculo
-router.post('/', verificarRol("admin"), vehiculoController.crearVehiculo);
+router.post("/", verificarRol("admin"), vehiculoController.crearVehiculo);
 
 //obtener vehiculos
-router.get('/', verificarRol("admin"), vehiculoController.obtenerVehiculos);
+router.get("/", verificarRol("admin"), vehiculoController.obtenerVehiculos);
 
 //obtener un vehiculo por id
-router.get('/:id', verificarRol("admin"), vehiculoController.obtenerVehiculoPorId);
+router.get(
+	"/:id",
+	verificarRol("admin"),
+	vehiculoController.obtenerVehiculoPorId,
+);
 
 //actualizar un vehiculo
-router.patch('/:id', verificarRol("admin"), vehiculoController.actualizarVehiculo);
+router.patch(
+	"/:id",
+	verificarRol("admin"),
+	vehiculoController.actualizarVehiculo,
+);
 
 //borrar un vehiculo
-router.delete('/:id', verificarRol("admin"), vehiculoController.eliminarVehiculo);
+router.delete(
+	"/:id",
+	verificarRol("admin"),
+	vehiculoController.eliminarVehiculo,
+);
 
 module.exports = router;
