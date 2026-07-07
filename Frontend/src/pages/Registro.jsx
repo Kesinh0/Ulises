@@ -32,7 +32,7 @@ const Registro = () => {
                     </div>
                     {/* el botón de registrarse debe mandar la informacion a la base de datos */}
                     <button onClick={handleSubmit} type="submit">Registrarse</button>
-                    <button onClick={(e) => register("/")} type="button">Volver al inicio</button>
+                    <button onClick={(e) => navigate("/")} type="button">Volver al inicio</button>
                     <p><br/></p>
                 </form>
             </div>
