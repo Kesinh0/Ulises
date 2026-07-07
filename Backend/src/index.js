@@ -1,6 +1,8 @@
 require("reflect-metadata");
 
 const express = require("express");
+const cors = require("cors");
+
 const config = require("./conf/config");
 const db = require("./conf/db");
 const vehiculoR = require("./routes/vehiculoR");
@@ -10,6 +12,12 @@ const authR = require("./routes/authR");
 
 const app = express();
 
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  }),
+);
 app.use(express.json());
 app.use("/vehiculos", vehiculoR);
 app.use("/horarios", horarioR);
@@ -17,20 +25,20 @@ app.use("/usuarios", usuarioR);
 app.use("/auth", authR);
 
 app.get("/", (req, res) => {
-	res.json({ mensaje: "porfa funciona", version: "1.0.0" });
+  res.json({ mensaje: "porfa funciona", version: "1.0.0" });
 });
 
 app.use((req, res) => {
-	res.status(404).json({ success: false, error: "no se encontró ruta" });
+  res.status(404).json({ success: false, error: "no se encontró ruta" });
 });
 
 db.initialize()
-	.then(() => {
-		console.log("base de datos conectada");
-		app.listen(config.PORT, () => {
-			console.log(`Servidor corriendo en: ${config.PORT}`);
-		});
-	})
-	.catch((err) => {
-		console.error("no se pudo conectar a la db:", err);
-	});
+  .then(() => {
+    console.log("base de datos conectada");
+    app.listen(config.PORT, () => {
+      console.log(`Servidor corriendo en: ${config.PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("no se pudo conectar a la db:", err);
+  });

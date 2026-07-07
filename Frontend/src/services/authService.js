@@ -1,44 +1,69 @@
-import axios from './rootService.js';
-import cookies from 'js-cookie';
-import { jwtDecode } from 'jwt-decode';
+import axios from "./rootService.js";
+import cookies from "js-cookie";
 
 export async function login(dataUser) {
-    try {
-        const { email, password } = dataUser;
-        const response = await axios.post('/auth/login', {
-            email,
-            password
-        });
-        
-        const { token, user } = response.data.data;
-        
-        cookies.set('jwt-auth', token, { path: '/login' });
-        sessionStorage.setItem('usuario', JSON.stringify(user));
-        
-        return response.data;
-    } catch (error) {
-        return error.response?.data || { message: 'Error al conectar con el servidor' };
-    }
+  try {
+    const { correo, contrasena } = dataUser;
+    const response = await axios.post("/auth/login", {
+      correo,
+      contrasena,
+    });
+
+    const { token, user } = response.data.data;
+
+    cookies.set("jwt-auth", token, { path: "/login" });
+    sessionStorage.setItem("usuario", JSON.stringify(user));
+
+    return response.data;
+  } catch (error) {
+    return (
+      error.response?.data || { message: "Error al conectar con el servidor" }
+    );
+  }
 }
 
 export async function register(data) {
-    try {
-        const { email, password } = data;
-        const response = await axios.post('/auth/register', {
-            email,
-            password
-        });
-        return response.data;
-    } catch (error) {
-        return error.response?.data || { message: 'Error al conectar con el servidor' };
-    }
+  try {
+    const { correo, contrasena } = data;
+    const response = await axios.post("/auth/register", {
+      correo,
+      contrasena,
+    });
+    return response.data;
+  } catch (error) {
+    return (
+      error.response?.data || { message: "Error al conectar con el servidor" }
+    );
+  }
 }
 
 export async function logout() {
-    try {
-        sessionStorage.removeItem('usuario');
-        cookies.remove('jwt-auth');
-    } catch (error) {
-        console.error('Error al cerrar sesión:', error);
+  try {
+    sessionStorage.removeItem("usuario");
+    cookies.remove("jwt-auth");
+  } catch (error) {
+    console.error("Error al cerrar sesión:", error);
+  }
+}
+
+export async function loadSession() {
+  try {
+    const token = cookies.get("jwt-auth", { path: "/" });
+    if (!token) {
+      return null;
     }
+
+    const response = await axios.get("/usuarios/perfil", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const user = response.data.data;
+    sessionStorage.setItem("usuario", JSON.stringify(user));
+    return user;
+  } catch (error) {
+    console.error("Error al cargar la sesión:", error);
+    return null;
+  }
 }
