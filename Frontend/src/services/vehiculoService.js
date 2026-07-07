@@ -1,4 +1,4 @@
-import axios from 'rootService.js';   
+import axios from './rootService.js';   
 
 export async function getVehiculos() {
   try {

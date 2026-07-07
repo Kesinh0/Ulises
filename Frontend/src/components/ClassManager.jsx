@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { getVehiculos } from "../services/vehiculoService";
+
 
 const DIAS = [
     "LUNES",

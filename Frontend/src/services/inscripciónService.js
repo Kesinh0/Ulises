@@ -1,4 +1,4 @@
-import axios from 'rootService.js';
+import axios from './rootService.js';
 
 export const getInscripciones = async () => {
   try {
