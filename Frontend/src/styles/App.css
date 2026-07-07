@@ -87,6 +87,7 @@ li.terminos-list-item {
 .terminos-container,
 .forms,
 .Login,
+.register,
 .right,
 .left {
     background-color: #332940;
@@ -126,9 +127,11 @@ li.terminos-list-item {
 .descripcion-login {
     font-size: 16px;
     text-align: center;
-    margin-bottom: 24px;
 }
-
+.descripcion-registro {
+    font-size: 16px;
+    text-align: center;
+}
 
 
 
@@ -210,18 +213,6 @@ li.terminos-list-item {
     border-bottom: 2px solid var(--color-black);
     flex: 1;
     margin: 0 0.6rem;
-}
-
-.Login {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.Login .volver-inicio {
-    display: block;
-    margin: 0 auto;
 }
 
 form,

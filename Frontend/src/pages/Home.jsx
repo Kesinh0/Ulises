@@ -4,12 +4,15 @@ const Home = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="container-home">
-            <h1 className="mensaje-bienvenida">Bienvenido a la escuela de manejo</h1>
-            <p className="descripcion-login">Inicie sesión o regístrese para continuar</p>
-            <button onClick={() => navigate("/login")}>Login</button>
-            <button onClick={() => navigate("/registro")}>Registrarse</button>
-            <p><br/></p>
+        <div className="right" id="right">
+            <div className="container-home">
+                <h1 className="mensaje-bienvenida">Bienvenido a la escuela de manejo</h1>
+                <p className="descripcion-login"><br/>Iniciar sesión</p>
+                <button onClick={() => navigate("/login")}>Login</button>
+                <p className="descripcion-registro">¿no estas registrado?</p>
+                <button onClick={() => navigate("/registro")}>Registrarse</button>
+                <p><br/></p>
+            </div>
         </div>
     )
 }
