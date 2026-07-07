@@ -19,7 +19,7 @@ const usuarioSchema = Joi.object({
 		empty: "La contraseña no puede estar vacia",
 	}),
 
-	rol: Joi.string().valid("alumno", "profesor").required().messages({
+	rol: Joi.string().valid("alumno", "profesor", "admin").required().messages({
 		invalid: "Rol invalido",
 		empty: "El rol no puede estar vacio",
 	}),
@@ -31,7 +31,7 @@ const updateUsuarioSchema = Joi.object({
 		.email({ tlds: { allow: false } })
 		.optional(),
 	contrasena: Joi.string().min(8).optional(),
-	rol: Joi.string().valid("alumno", "profesor").optional(),
+	rol: Joi.string().valid("alumno", "profesor", "admin").optional(),
 }).min(1);
 
 module.exports = { usuarioSchema, updateUsuarioSchema };

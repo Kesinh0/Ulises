@@ -16,20 +16,6 @@ const horarioSchema = Joi.object({
       invalid: "Dia invalido",
       empty: "El dia no puede estar vacio",
     }),
-  horaInicio: Joi.string()
-    .pattern(/^([01]\d|2[0-3]):([0-5]\d)$/)
-    .required()
-    .messages({
-      invalid: "Hora de inicio invalida",
-      empty: "La hora de inicio no puede estar vacia",
-    }),
-  horaFin: Joi.string()
-    .pattern(/^(([01]\d)|(2[0-3])):([0-5]\d)$/)
-    .required()
-    .messages({
-      invalid: "Hora de fin invalida",
-      empty: "La hora de fin no puede estar vacia",
-    }),
 });
 
 const updateHorarioSchema = Joi.object({
@@ -43,12 +29,6 @@ const updateHorarioSchema = Joi.object({
       "SABADO",
       "DOMINGO",
     )
-    .optional(),
-  horaInicio: Joi.string()
-    .pattern(/^([01]\d|2[0-3]):([0-5]\d)$/)
-    .optional(),
-  horaFin: Joi.string()
-    .pattern(/^([01]\d|2[0-3]):([0-5]\d)$/)
     .optional(),
 }).min(1);
 

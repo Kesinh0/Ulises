@@ -21,21 +21,15 @@ module.exports = new EntitySchema({
         "DOMINGO",
       ],
     },
-    horaInicio: {
-      type: "time",
-    },
-    horaFin: {
-      type: "time",
-    },
-    profesorId: {
+    usuarioId: {
       type: "int",
     },
   },
   relations: {
-    profesor: {
+    usuario: {
       type: "many-to-one",
       target: "Usuario",
-      joinColumn: { name: "profesorId" },
+      joinColumn: { name: "usuarioId" },
     },
   },
 });

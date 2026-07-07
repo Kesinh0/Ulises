@@ -26,7 +26,7 @@ module.exports = new EntitySchema({
 		},
 		rol: {
 			type: "enum",
-			enum: ["alumno", "profesor"],
+			enum: ["alumno", "profesor","admin"],
 			nullable: false,
 		},
 	},

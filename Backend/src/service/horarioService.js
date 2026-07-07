@@ -7,10 +7,8 @@ const horarioRepository = db.getRepository(horario);
 const crearHorario = async (horarioData) => {
   const horarioExistente = await horarioRepository.findOne({
     where: {
-      profesorId: horarioData.profesorId,
+      usuarioId: horarioData.usuarioId,
       dia: horarioData.dia,
-      horaInicio: LessThanOrEqual(horarioData.horaFin),
-      horaFin: MoreThanOrEqual(horarioData.horaInicio),
     },
   });
 

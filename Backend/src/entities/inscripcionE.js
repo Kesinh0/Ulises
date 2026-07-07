@@ -9,7 +9,7 @@ module.exports = new EntitySchema({
       type: "int",
       generated: "increment",
     },
-    cursoId: {
+    profesorId: {
       type: "int",
       nullable: false,
     },
@@ -23,10 +23,10 @@ module.exports = new EntitySchema({
     },
   },
   relations: {
-    curso: {
+    profesorId: {
       type: "many-to-one",
-      target: "Curso",
-      joinColumn: { name: "cursoId" },
+      target: "Usuario",
+      joinColumn: { name: "profesorId" },
     },
     alumno: {
       type: "many-to-one",
