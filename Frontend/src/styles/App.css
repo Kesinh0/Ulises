@@ -17,6 +17,8 @@ body{
     color: white;
 }
 
+
+
 button {
   background-color: #7c5cbf;
   color: #ffffff;
@@ -24,6 +26,11 @@ button {
   padding: 10px 20px;
   border-radius: 6px;
   cursor: pointer;
+}
+
+a {
+    color: #b39ddb;
+    text-decoration: underline;
 }
 
 input[type="text"],
@@ -51,6 +58,26 @@ button:active {
   background-color: #654a9e;
 }
 
+/*pagina de error*/
+.not-found-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 40px;
+}
+.not-found-text {
+    flex: 0 1 800px;
+    text-align: left;
+}
+.not-found-image {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+}
+
+
+/*Terminos*/
 ol.terminos-list {
   display: flex;
   flex-wrap: wrap;
@@ -73,10 +100,7 @@ li.terminos-list-item {
 .terms-label input[type="checkbox"] {
     margin-right: 0.5rem;
 }
-.terms-label a {
-  color: #b39ddb;
-  text-decoration: underline;
-}
+
 
 .terms-label a:hover {
   color: #d4c2f0;
@@ -119,6 +143,9 @@ li.terminos-list-item {
     background-color: #9370d8;
 }
 
+
+/*Login*/
+
 .mensaje-bienvenida {
     font-size: 24px;
     font-weight: bold;
@@ -132,6 +159,7 @@ li.terminos-list-item {
     font-size: 16px;
     text-align: center;
 }
+
 
 
 
