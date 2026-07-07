@@ -9,6 +9,7 @@ import Layout from "./components/Layout.jsx";
 import Error404 from "./pages/Error404.jsx";
 import Login from "./pages/Login.jsx";
 import Estudiante from "./pages/Estudiante.jsx";
+import inscripciones from "./pages/Inscripciones.jsx";
 import Profesor from "./pages/Profesor.jsx";
 import Home from "./pages/Home.jsx";
 import Registro from "./pages/Registro.jsx";
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "/admin",
         element: <Admin />,
+      },
+      {
+        path: "/inscripciones",
+        element: <inscripciones />,
       },
     ],
   },
