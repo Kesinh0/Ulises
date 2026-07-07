@@ -10,8 +10,8 @@ const crearInscripcion = async (req,res) => {
         if (error) {
             return sendError(res, 'Error de validación', 400, error.details.map(e => e.message));
         }
-        const alumno = obtenerAlumnoPorId(value.alumnoId);
-        const profesor = obtenerProfesorPorId(value.profesorId);
+        const alumno = req.usuario;
+        const profesor = await obtenerProfesorPorId(value.profesorId);
         if(!alumno){
             return sendError(res, 'Alumno no encontrado', 400);
         }
@@ -46,7 +46,7 @@ const obtenerInscripcionesPorProfesor = async (req,res) => {
 
 const obtenerInscripcionPorAlumno = async (req,res) => {
     try{
-        const {alumnoId} = req.params;
+        const {alumnoId} = req.usuario.id;
         const inscripcion = await inscripcionService.obtenerInscripcionPorAlumno(alumnoId);
         if (!inscripcion) {
             return sendError(res, 'Inscripción no encontrada', 404);
@@ -60,7 +60,7 @@ const obtenerInscripcionPorAlumno = async (req,res) => {
 
 const eliminarInscripcion = async (req,res) => {
     try{
-        const {alumnoId} = req.params;
+        const {alumnoId} = req.usuario.id;
         await inscripcionService.eliminarInscripcion(alumnoId);
         return sendSuccess(res, null, 'Inscripción eliminada exitosamente');
     }catch (err) {
