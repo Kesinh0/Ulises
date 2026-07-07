@@ -1,66 +1,76 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getVehiculos } from "../services/vehiculoService";
-
+import { getHorarios, crearHorario } from "../services/horarioService";
 
 const DIAS = [
-    "LUNES",
-    "MARTES",
-    "MIERCOLES",
-    "JUEVES",
-    "VIERNES",
-    "SABADO",
-    "DOMINGO",
+    "LUNES","MARTES","MIERCOLES","JUEVES","VIERNES","SABADO","DOMINGO",
 ];
 
-//VALORES TEMPORALES MIENTRAS JUNTAN EL BACKEND
-const vehiculosMock = [
-    { id: 1, marca: "Toyota", modelo: "Yaris", anio: 2020, enMantenimiento: false },
-    { id: 2, marca: "Chevrolet", modelo: "Sail", anio: 2019, enMantenimiento: false },
-    { id: 3, marca: "Suzuki", modelo: "Swift", anio: 2021, enMantenimiento: true },
-];
-const profesorActualId = 1;
-//FIN VALORES TEMPORALES
+const profesorActualId = 1;//lo cambiamos despues en la logica
 
 function ClassManager(){
     const [horarios, setHorarios] = useState([]);
-    const [formData, setFormData] = useState({
-        dia:"",
-        vehiculoId: "",
-    });
-    //tambien cambiar despues
-    const vehiculosDisponibles = vehiculosMock.filter((v) => !v.enMantenimiento);
+    const [vehiculos, setVehiculos] = useState([]);
+    const [formData, setFormData] = useState({ dia: "", vehiculoId: "" });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    useEffect(() =>{
+        async function cargarDatos() {
+            const [vehiculosRes, horariosRes] = await Promise.all([
+                getVehiculos(),
+                getHorarios(),
+            ]);
+
+            if(vehiculosRes.success) {
+                //solo los que no estan en mantenimiento
+                setVehiculos(vehiculosRes.data.filter((v) => !v.enMantenimiento));
+            }else{
+                setError(vehiculosRes.message);
+            }
+
+            if(horariosRes.success){
+                //horarios que son del profe
+                setHorarios(horariosRes.data.filter((h) => h.usuarioId === profesorActualId));
+            }else{
+                setError(horariosRes.message);
+            }
+        }
+        cargarDatos();
+    }, []);
 
     const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
+        setFormData({ ...formData, [e.target.name]: e.target.value,});
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setError(null);
+
+
         const nuevoHorario = {
-            id: Date.now(), // temporal, luego lo sacamos del backend
             dia: formData.dia,
             usuarioId: profesorActualId,
             vehiculoId: Number(formData.vehiculoId),
         };
+        const res = await crearHorario(nuevoHorario);
 
-        setHorarios([...horarios, nuevoHorario]);
-
-        setFormData({
-            dia:"",
-            vehiculoId: "",
-        });
-
+        if(res.success){
+            setHorarios([...horarios, res.data]);
+            setFormData({ dia: "", vehiculoId: ""});
+        }else{
+            setError(res.message);
+        }
         
-
-        
-        
+        setLoading(false);
     };
+
     return (
         <div className="ClassManager">
             <h3>Agregar Una Clase</h3>
+            {error && <p className="error-msg">{error}</p>}
+
             <form onSubmit={handleSubmit} className="class-form">
                 <label>
                     <br />
@@ -89,7 +99,7 @@ function ClassManager(){
                         className="select-form"
                     >
                         <option value="">Selecciona un vehículo</option>
-                        {vehiculosDisponibles.map((v) => (
+                        {vehiculos.map((v) => (
                             <option key={v.id} value={v.id}>
                                 {v.marca} {v.modelo} ({v.anio})
                             </option>
@@ -97,7 +107,7 @@ function ClassManager(){
                     </select>
                 </label>
                 <p><br /></p>        
-                <button type="submit">Crear clase</button>
+                <button type="submit" disabled={loading}>{loading ? "creando...":"Crear Clase"}</button>
             </form>
 
             <div className="class-list">
@@ -105,7 +115,7 @@ function ClassManager(){
                 {horarios.length === 0 && <p>No has creado clases aún.</p>}
                 <ul>
                     {horarios.map((h) => {
-                        const vehiculo = vehiculosMock.find((v) => v.id === h.vehiculoId);
+                        const vehiculo = vehiculos.find((v) => v.id === h.vehiculoId);
                         return (
                             <li key={h.id}>
                                 <strong>{h.dia}</strong> — {vehiculo?.marca} {vehiculo?.modelo}
@@ -119,7 +129,7 @@ function ClassManager(){
     );
 }
 
-export default ClassManager
+export default ClassManager;
 
 
 
