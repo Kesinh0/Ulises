@@ -53,6 +53,7 @@ function TareaManager() {
             <form onSubmit={handleSubmit} className="tarea-form">
                 <label>
                     Curso
+                    <p></p> 
                     <select
                         name="cursoId"
                         value={formData.cursoId}
@@ -71,6 +72,7 @@ function TareaManager() {
 
                 <label>
                     Título
+                    <p></p>
                     <input
                         type="text"
                         name="titulo"
@@ -83,6 +85,7 @@ function TareaManager() {
 
                 <label>
                     Descripción
+                    <p></p>
                     <textarea
                         name="descripcion"
                         value={formData.descripcion}
@@ -93,6 +96,7 @@ function TareaManager() {
 
                 <label>
                     Material (link o referencia)
+                    <p></p>
                     <input
                         type="text"
                         name="material"
@@ -104,6 +108,7 @@ function TareaManager() {
 
                 <label>
                     Fecha de entrega
+                    <p></p>
                     <input
                         type="date"
                         name="fechaEntrega"
@@ -117,6 +122,7 @@ function TareaManager() {
             </form>
 
             <div className="tarea-list">
+                <p><br/><strong>Lista de Tareas</strong></p>
                 {tareas.length === 0 && <p>No has creado tareas aún.</p>}
                 <ul>
                     {tareas.map((t) => {

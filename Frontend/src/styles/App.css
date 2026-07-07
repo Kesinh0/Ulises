@@ -44,6 +44,20 @@ textarea {
   padding: 8px 12px;
 }
 
+input[type="date"]{
+    background-color: #2a2430;
+    color: #e0d9eb;
+    border: 1px solid #4a3d5c;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 15px;
+    color-scheme: dark;
+}
+input[type="date"]:focus {
+  border-color: #9370d8;
+  outline: none;
+}
+
 input:focus,
 textarea:focus {
   border-color: #9370d8;
@@ -107,7 +121,36 @@ button:active {
   overflow-wrap: break-word; 
 }
 
+/*Tarea manager*/
+.TareaManager {
+  width: 100%;
+  max-width: 400px; 
+  box-sizing: border-box;
+}
 
+.tarea-list {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tarea-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tarea-list li {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 12px;
+  background-color: #2a2430;
+  border: 1px solid #4a3d5c;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  overflow-wrap: break-word; 
+}
 
 /*Terminos*/
 ol.terminos-list {
