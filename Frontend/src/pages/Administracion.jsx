@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import cookies from "js-cookie";
 import admin from "../assets/Admin.png";
 import ProfeManager from "../components/ProfeManager";
 import VehiculoManager from "../components/VehiculoManager";
@@ -14,6 +16,9 @@ const TABS = [
 const Admin = () => {
     const navigate = useNavigate();
     const [tabActiva, setTabActiva] = useState(TABS[0].id);
+    
+    
+    
     const TabComponent = TABS.find((t) => t.id === tabActiva)?.component;
     return (
         <div className="right" id="right">

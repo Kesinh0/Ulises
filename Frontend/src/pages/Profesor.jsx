@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import cookies from "js-cookie";
 import profesor from "../assets/Profesor.png";
 import ClassManager from "../components/ClassManager";
 import TareaManager from "../components/TareaManager";
@@ -17,6 +19,20 @@ const TABS = [
 const Profesor = () => {
     const navigate = useNavigate();
     const [tabActiva, setTabActiva] = useState(TABS[0].id);
+    const [nombreProfesor, setNombreProfesor] = useState("");
+        
+    useEffect(() => {
+        const token = cookies.get("jwt-auth");
+        if (token) {
+            try {
+                const decoded = jwtDecode(token);
+                console.log(decoded);
+                setNombreProfesor(decoded.nombre || "");
+            } catch (err) {
+                console.error("Error al decodificar el token:", err);
+            }
+        }
+    }, []);
 
     const TabComponent = TABS.find((t) => t.id === tabActiva)?.component;
 
@@ -29,7 +45,7 @@ const Profesor = () => {
             <div className="Profesor">
                 <img src={profesor} alt="profesor" className="profesor-image"/>
                 <p>
-                    Bienvenido de vuelta (PROFE). 
+                    Bienvenido de vuelta, {nombreProfesor || "error"}. 
                 </p>
                 {/*Panel de control del profesor*/}
                 <div className="tabs-nav">
