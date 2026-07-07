@@ -41,54 +41,6 @@ async function crearUsuario(req, res) {
 	}
 }
 
-const obtenerUsuarios = async (req, res) => {
-	try {
-		const usuarios = await usuarioService.obtenerUsuarios();
-		sendSuccess(res, usuarios, "Usuarios obtenidos exitosamente", 200);
-	} catch (error) {
-		sendError(res, "Error al obtener los usuarios", 500);
-	}
-};
-
-const obtenerUsuarioPorId = async (req, res) => {
-	try {
-		const { id } = req.params;
-		const usuario = await usuarioService.obtenerUsuarioPorId(id);
-		if (!usuario) {
-			return sendError(res, "Usuario no encontrado", 404);
-		}
-		sendSuccess(res, usuario, "Usuario obtenido exitosamente", 200);
-	} catch (error) {
-		sendError(res, "Error al obtener el usuario", 500);
-	}
-};
-
-const obtenerAlumnoPorId = async (req, res) => {
-	try {
-		const { id } = req.params;
-		const usuario = await usuarioService.obtenerAlumnoPorId(id);
-		if (!usuario) {
-			return sendError(res, "Usuario no encontrado", 404);
-		}
-		sendSuccess(res, usuario, "Usuario obtenido exitosamente", 200);
-	} catch (error) {
-		sendError(res, "Error al obtener el usuario", 500);
-	}
-};
-
-const obtenerProfesorPorId = async (req, res) => {
-	try {
-		const { id } = req.params;
-		const usuario = await usuarioService.obtenerProfesorPorId(id);
-		if (!usuario) {
-			return sendError(res, "Usuario no encontrado", 404);
-		}
-		sendSuccess(res, usuario, "Usuario obtenido exitosamente", 200);
-	} catch (error) {
-		sendError(res, "Error al obtener el usuario", 500);
-	}
-};
-
 const obtenerPerfil = async (req, res) => {
 	try {
 		const usuario = req.usuario; // El usuario autenticado se encuentra en req.usuario
