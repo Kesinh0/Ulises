@@ -128,6 +128,14 @@ function listarProfesores() {
 		});
 }
 
+function listarAlumnos(){
+	return usuarioRepository
+		.find({ where: { rol: "alumno" } })
+		.then((alumnos) => {
+			return alumnos.map((alumno) => cleanUser(alumno));
+		});
+}
+
 module.exports = {
 	crearUsuario,
 	obtenerUsuarioPorCorreo,
@@ -137,4 +145,5 @@ module.exports = {
 	obtenerAlumnoPorId,
 	obtenerProfesorPorId,
 	listarProfesores,
+	listarAlumnos,
 };

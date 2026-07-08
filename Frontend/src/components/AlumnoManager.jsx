@@ -30,7 +30,6 @@ function AlumnoManager(){
                     </li>
                 ))}
             </ul>
-            <button onClick={() => navigate("/login")}>Volver al inicio</button>
         </div>
     );
 }

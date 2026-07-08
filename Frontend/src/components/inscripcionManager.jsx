@@ -65,7 +65,7 @@ const inscripcionManager = () => {
     try {
       await inscripcionService.crearInscripcion(inscripcionData);
 
-      navigate("/inscripciones");
+      navigate("/estudiante");
     } catch (error) {
       console.error("Error al inscribirse al profesor:", error);
       alert("error al inscribirse al profesor: " + error.message);

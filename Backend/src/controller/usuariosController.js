@@ -111,6 +111,15 @@ const listarProfesores = async (req, res) => {
 	}
 };
 
+const listarAlumnos = async (req, res) => {
+	try {
+		const alumnos = await usuarioService.listarAlumnos();
+		sendSuccess(res, alumnos, "alumnos obtenidos exitosamente", 200);
+	} catch (error) {
+		sendError(res, "Error al obtener los alumnos", 500);
+	}
+};
+
 const eliminarUsuarioPorId = async (req, res) => {
 	try {
 		const usuarioId = req.params.id;
@@ -134,5 +143,6 @@ module.exports = {
 	actualizarUsuario,
 	eliminarUsuario,
 	listarProfesores,
+	listarAlumnos,
 	eliminarUsuarioPorId,
 };

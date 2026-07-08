@@ -157,9 +157,9 @@ function ClassManager() {
             return (
               <li key={h.id}>
                 <strong>
-                  {h.dia} {h.horaInicio} - {h.horaFin}
+                  {h.dia}:<br/> {h.horaInicio} - {h.horaFin}
                 </strong>{" "}
-                — {vehiculo?.marca} {vehiculo?.modelo}
+                {vehiculo?.marca} {vehiculo?.modelo}
               </li>
             );
           })}

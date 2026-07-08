@@ -147,6 +147,7 @@ export async function eliminarUsuario(id) {
 export default {
   obtenerPerfil,
   listarProfesores,
+  listarAlumnos,
   actualizarPerfil,
   eliminarPerfil,
   crearProfesor,

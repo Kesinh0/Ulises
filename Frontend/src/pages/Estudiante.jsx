@@ -52,6 +52,7 @@ const Estudiante = () => {
                 .then((response) => {
                     if (response.success) {
                         alert("Te has dado de baja del curso exitosamente.");
+                        window.location.reload();
                     } else {
                         alert("Error al darse de baja: " + response.message);
                     }
@@ -99,7 +100,7 @@ const Estudiante = () => {
               <button className="baja-btn" onClick={handleDarseDeBaja}>
                 Darse de baja
               </button>
-              <button onClick={() => navigate("/")}>Volver al inicio</button>
+              
             </div>
           </>
         )}
@@ -111,8 +112,9 @@ const Estudiante = () => {
           </>
         )}
         <button onClick={() => navigate("/inscripciones")}>
-              Profesores
+              Inscribirse a un curso
         </button>
+        <button onClick={() => navigate("/")}>Volver al inicio</button>
       </div>
     </div>
   );

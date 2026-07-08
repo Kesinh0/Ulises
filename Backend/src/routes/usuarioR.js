@@ -19,6 +19,8 @@ router.delete("/perfil", verificarAuth, usuarioController.eliminarUsuario);
 //listar profesores
 router.get("/profesores", usuarioController.listarProfesores);
 
+router.get("/alumnos", usuarioController.listarAlumnos);
+
 router.delete(
 	"/:id",
 	verificarRol("admin"),
