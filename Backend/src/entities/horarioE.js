@@ -33,11 +33,13 @@ module.exports = new EntitySchema({
 			type: "many-to-one",
 			target: "Usuario",
 			joinColumn: { name: "usuarioId" },
+			onDelete: "CASCADE",
 		},
 		vehiculo: {
 			type: "many-to-one",
 			target: "Vehiculo",
 			joinColumn: { name: "vehiculoId" },
+			onDelete: "CASCADE",
 		},
 	},
 });
