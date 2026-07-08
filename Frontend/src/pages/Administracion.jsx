@@ -7,7 +7,10 @@ import ProfeManager from "../components/ProfeManager";
 import VehiculoManager from "../components/VehiculoManager";
 
 const TABS = [
-  { id: "profes", label: "Administracion Profesores", component: ProfeManager },
+  { 
+    id: "profes", 
+    label: "Administracion Profesores", 
+    component: ProfeManager },
   {
     id: "vehiculos",
     label: "Administracion Vehiculos",

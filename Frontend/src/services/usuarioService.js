@@ -81,3 +81,45 @@ export async function eliminarPerfil() {
 		return false;
 	}
 }
+
+export async function crearProfesor(data) {
+  try {
+    const { correo, contrasena, nombre } = data;
+    const response = await axios.post("/usuarios", {
+      nombre,
+      correo,
+      contrasena,
+      rol: "profesor",
+    });
+    return { success: true, data: response.data.data };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      message: error.response?.data?.message || "Error al conectar con el servidor",
+    };
+  }
+}
+
+export async function eliminarUsuario(id) {
+	try {
+		const token = cookies.get("jwt-auth", { path: "/" });
+		if (!token) {
+			return { success: false, message: "No hay sesión activa" };
+		}
+
+		const response = await axios.delete(`/usuarios/${id}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+
+		return { success: true, data: response.data };
+	} catch (error) {
+		console.error("Error al eliminar el usuario:", error);
+		return {
+			success: false,
+			message: error.response?.data?.message || "Error al eliminar el usuario",
+		};
+	}
+}
