@@ -7,7 +7,11 @@ const verificarRol = require("../middlewares/verificarRol");
 router.post("/", verificarRol("admin"), vehiculoController.crearVehiculo);
 
 //obtener vehiculos
-router.get("/", verificarRol("admin"), vehiculoController.obtenerVehiculos);
+router.get(
+	"/",
+	verificarRol("admin", "profesor"),
+	vehiculoController.obtenerVehiculos,
+);
 
 //obtener un vehiculo por id
 router.get(
