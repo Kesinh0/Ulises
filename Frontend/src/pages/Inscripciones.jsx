@@ -1,19 +1,43 @@
 import {useNavigate} from "react-router-dom";
+import { seleccionarProfesor } from "../services/usuarioService.js";
 const inscripcionService =  "../services/inscripcionService.js";
+import { useState, useEffect, useCallback } from 'react';
+import {ProfeManager} from "../components/ProfeManager.jsx";
 
-function Inscripciones() {
-  const navigate = useNavigate();
+const useProfesores = () => {
+    const [profesores, setProfesores] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  const handleVolver = () => {
-    navigate(-1); // Navega a la página anterior
-  };
+    const fetchProfesores = useCallback(async () => {
+        try {
+            setLoading(true);
+            const response = await seleccionarProfesor();
+            if (response.success) {
+                setProfesores(response.data);
+            } else {
+                setError(response.message);
+            }
+        } catch (err) {
+            setError(err.message || 'Error al obtener los profesores');
+        } finally {
+            setLoading(false);
+        }
+    }, []);
 
-  return (
-    <div>
-      <h1>Inscripciones</h1>
-      <p>Esta es la página de inscripciones.</p>
-      <button onClick={handleVolver}>Volver</button>
-    </div>
-  );
+    const eliminarProfesor = async (id) => {
+        try {
+            const response = await inscripcionService.eliminarInscripcion(id);
+            if (response.success) {
+                setProfesores((prevProfesores) => prevProfesores.filter((profesor) => profesor.id !== id));
+            } else {
+                setError(response.message);
+            }
+        } catch (err) {
+            setError(err.message || 'Error al eliminar el profesor');
+        }
+    };
+
+    return { profesores, loading, error, fetchProfesores, eliminarProfesor };
 }
-export default Inscripciones
+
