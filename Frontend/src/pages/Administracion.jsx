@@ -7,48 +7,42 @@ import ProfeManager from "../components/ProfeManager";
 import VehiculoManager from "../components/VehiculoManager";
 
 const TABS = [
-    { id: "profes", label: "Administracion Profesores", component: ProfeManager},
-    { id: "vehiculos", label: "Administracion Vehiculos", component: VehiculoManager},
-]
-
-
+  { id: "profes", label: "Administracion Profesores", component: ProfeManager },
+  {
+    id: "vehiculos",
+    label: "Administracion Vehiculos",
+    component: VehiculoManager,
+  },
+];
 
 const Admin = () => {
-    const navigate = useNavigate();
-    const [tabActiva, setTabActiva] = useState(TABS[0].id);
-    
-    
-    
-    const TabComponent = TABS.find((t) => t.id === tabActiva)?.component;
-    return (
-        <div className="right" id="right">
-            <h1>
-                Secretaria
-            </h1>
+  const navigate = useNavigate();
+  const [tabActiva, setTabActiva] = useState(TABS[0].id);
 
-            <div className="Admin">
-                <img src={admin} alt="admin" className="admin-image"/>
-                <p>
-                    Bienvenido (admin)
-                </p>
-                <div className="tabs-nav">
-                    {TABS.map((tab) => (
-                        <button
-                            key={tab.id}
-                            className={`tab-btn ${tabActiva === tab.id ? "active" : ""}`}
-                            onClick={() => setTabActiva(tab.id)}
-                        >
-                            {tab.label}
-                        </button>
-                    ))}
-                </div>
-                <div className="tab-content">
-                    {TabComponent && <TabComponent/>}
-                </div>
-                <button onClick={() => navigate("/")}>Volver al inicio</button>
-            </div>
+  const TabComponent = TABS.find((t) => t.id === tabActiva)?.component;
+  return (
+    <div className="right" id="right">
+      <h1>Secretaria</h1>
+
+      <div className="Admin">
+        <img src={admin} alt="admin" className="admin-image" />
+        <p>Bienvenido (admin)</p>
+        <div className="tabs-nav">
+          {TABS.map((tab) => (
+            <button
+              key={tab.id}
+              className={`tab-btn ${tabActiva === tab.id ? "active" : ""}`}
+              onClick={() => setTabActiva(tab.id)}
+            >
+              {tab.label}
+            </button>
+          ))}
         </div>
-    )
-}
+        <div className="tab-content">{TabComponent && <TabComponent />}</div>
+        <button onClick={() => navigate("/")}>Volver al inicio</button>
+      </div>
+    </div>
+  );
+};
 
-export default Admin
+export default Admin;
