@@ -4,6 +4,34 @@ import inscripcionService from "../services/inscripcionService.js";
 import useAuth from "../hooks/useAuth.js";
 import horarioService from "../services/horarioService.js";
 
+const ProfesorCard = ({ profesor, horarios, onInscribirse }) => {
+  const [mostrarHorarios, setMostrarHorarios] = useState(false);
+
+  const toggleHorarios = () => {
+    setMostrarHorarios(!mostrarHorarios);
+  };
+
+  return (
+    <div className="profesor-card">
+      <h3>{profesor.nombre}</h3>
+      <p>Correo: {profesor.correo}</p>
+      <button onClick={() => onInscribirse(profesor.id)}>Inscribirse</button>
+      <button onClick={toggleHorarios}>
+        {mostrarHorarios ? "Ocultar Horarios" : "Ver Horarios"}
+      </button>
+      {mostrarHorarios && horarios && (
+        <ul>
+          {horarios.map((h) => (
+            <li key={h.id}>
+              {h.dia} {h.horaInicio} - {h.horaFin}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
 const inscripcionManager = () => {
   const [profesores, setProfesores] = useState([]);
   const [horarios, setHorarios] = useState([]);
@@ -83,25 +111,16 @@ const inscripcionManager = () => {
   return (
     <div>
       <h2>Lista de Profesores</h2>
-      <ul>
-        {profesores.map((profesor, i) => (
-          <li key={profesor.id}>
-            nombre: {profesor.nombre} <br></br> correo: {profesor.correo}
-            <br></br>
-            <button onClick={() => handleInscribirse(profesor.id)}>
-              Inscribirse
-            </button>
-            <ul>
-              {horarios[i]?.map((horario) => (
-                <li key={horario.id}>
-                  dia: {horario.dia} <br></br> hora: {horario.horaInicio} -{" "}
-                  {horario.horaFin}
-                </li>
-              ))}
-            </ul>
-          </li>
+      <div className="profesores">
+        {profesores.map((profesor, index) => (
+          <ProfesorCard
+            key={profesor.id}
+            profesor={profesor}
+            horarios={horarios[index]}
+            onInscribirse={handleInscribirse}
+          />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
