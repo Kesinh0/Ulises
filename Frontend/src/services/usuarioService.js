@@ -43,6 +43,7 @@ export async function listarProfesores() {
 	}
 }
 
+
 export async function actualizarPerfil(usuarioData) {
 	try {
 		const token = cookies.get("jwt-auth", { path: "/" });
@@ -79,5 +80,25 @@ export async function eliminarPerfil() {
 	} catch (error) {
 		console.error("Error al eliminar el perfil:", error);
 		return false;
+	}
+}
+
+export async function seleccionarProfesor(id) {
+	try {
+		const token = cookies.get("jwt-auth", { path: "/" });
+		if (!token) {
+			return null;
+		}
+
+		const response = await axios.get(`/usuarios/profesores/${id}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+
+		return response.data.data; // Devuelve el profesor seleccionado
+	} catch (error) {
+		console.error("Error al seleccionar el profesor:", error);
+		return null;
 	}
 }

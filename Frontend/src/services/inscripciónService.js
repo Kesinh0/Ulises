@@ -1,4 +1,5 @@
 import axios from './rootService.js';
+import listarProfesores from './usuarioService.js';
 
 export const getInscripciones = async () => {
   try {
