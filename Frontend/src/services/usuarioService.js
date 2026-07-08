@@ -43,6 +43,26 @@ export async function listarProfesores() {
 	}
 }
 
+export async function listarAlumnos() {
+	try {
+		const token = cookies.get("jwt-auth", { path: "/" });
+		if (!token) {
+			return null;
+		}
+
+		const response = await axios.get("/usuarios/alumnos", {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+
+		return response.data.data; // Devuelve la lista de alumnos
+	} catch (error) {
+		console.error("Error al obtener la lista de alumnos:", error);
+		return null;
+	}
+}
+
 export async function actualizarPerfil(usuarioData) {
 	try {
 		const token = cookies.get("jwt-auth", { path: "/" });
