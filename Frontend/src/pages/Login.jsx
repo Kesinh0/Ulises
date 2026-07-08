@@ -9,6 +9,7 @@ function Login() {
   const [correo, setCorreo] = useState("");
   const [contrasena, setContrasena] = useState("");
   const { setUsuario } = useAuth();
+  const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,6 +27,13 @@ function Login() {
             navigate("/admin");
           }
         });
+      } else if (
+        response.message === "Datos de inicio de sesión inválidos" ||
+        response.message === "Credenciales inválidas"
+      ) {
+        setError("Correo o contraseña incorrectos");
+      } else {
+        setError("Error al iniciar sesión. Por favor, inténtalo de nuevo.");
       }
     });
   };
@@ -68,6 +76,7 @@ function Login() {
             </label>
             {/*IMPLEMENTAR QUE SE GUARDEN ESTOS DATOS*/}
           </div>
+          {error && <p className="error">{error}</p>}
           <button onClick={handleSubmit}>Iniciar Sesion</button>
           {/*ESTE BOTON DEBE LLEVARNOS A LA PAGINA DEL ESTUDIANTE O PROFESOR DEPENDIENDO DEL TIPO DE USUARIO*/}
           <button onClick={() => navigate("/")}>Volver al inicio</button>
