@@ -18,6 +18,9 @@ body{
 }
 
 li{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
     box-sizing: border-box;
     padding: 8px 12px;
@@ -29,6 +32,13 @@ li{
     overflow-wrap: break-word; 
 }
 
+li button{
+  margin-left:auto;
+}
+
+li button + button{
+  margin-left:8px;
+}
 
 button {
   background-color: #7c5cbf;
@@ -37,6 +47,7 @@ button {
   padding: 10px 20px;
   border-radius: 6px;
   cursor: pointer;
+  margin-bottom: 8px;
 }
 
 a {
