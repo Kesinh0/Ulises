@@ -15,4 +15,7 @@ router.put("/perfil", verificarAuth, usuarioController.actualizarUsuario);
 //eliminar un usuario
 router.delete("/perfil", verificarAuth, usuarioController.eliminarUsuario);
 
+//listar profesores
+router.get("/profesores", usuarioController.listarProfesores);
+
 module.exports = router;

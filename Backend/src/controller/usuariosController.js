@@ -101,9 +101,19 @@ const eliminarUsuario = async (req, res) => {
 	}
 };
 
+const listarProfesores = async (req, res) => {
+	try {
+		const profesores = await usuarioService.listarProfesores();
+		sendSuccess(res, profesores, "Profesores obtenidos exitosamente", 200);
+	} catch (error) {
+		sendError(res, "Error al obtener los profesores", 500);
+	}
+};
+
 module.exports = {
 	crearUsuario,
 	obtenerPerfil,
 	actualizarUsuario,
 	eliminarUsuario,
+	listarProfesores,
 };
