@@ -1,9 +1,12 @@
 import {Outlet} from "react-router-dom";
-{/*parte de si queremos meterle algo mas al diseño principal ponerlo aca, tipo un header*/}
+import Header from "./Header.jsx";
 
 function Layout() {
     return (
-        <Outlet />
+        <>
+            <header />
+            <Outlet />
+        </>
     );
 }
 

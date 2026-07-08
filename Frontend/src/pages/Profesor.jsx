@@ -4,13 +4,11 @@ import { jwtDecode } from "jwt-decode";
 import cookies from "js-cookie";
 import profesor from "../assets/Profesor.png";
 import ClassManager from "../components/ClassManager";
-import TareaManager from "../components/TareaManager";
 import MaterialManager from "../components/MaterialManager";
 import AlumnoManager from "../components/AlumnoManager";
 
 const TABS = [
     { id: "horario", label: "Horario", component: ClassManager },
-    { id: "tareas", label: "Tareas", component: TareaManager },
     { id: "materia", label:"Material", component: MaterialManager},
     { id: "alumnos", label:"Curso", component: AlumnoManager},
     //agregar tabs aca cuando se crean

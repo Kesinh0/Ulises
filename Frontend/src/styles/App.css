@@ -473,3 +473,29 @@ form buttom{
 .tab-content {
   width: 100%;
 }
+
+
+.app-header {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px;
+  background-color: #1f1b24;
+  border-bottom: 1px solid #4a3d5c;
+}
+
+.app-header button {
+  background-color: transparent;
+  color: #b39ddb;
+  border: 1px solid #4a3d5c;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.app-header button:hover {
+  background-color: #332940;
+  color: #d4c2f0;
+}

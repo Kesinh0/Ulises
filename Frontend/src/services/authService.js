@@ -11,7 +11,7 @@ export async function login(dataUser) {
 
     const { token, user } = response.data.data;
 
-    cookies.set("jwt-auth", token, { path: "/login" });
+    cookies.set("jwt-auth", token, { path: "/" });
     sessionStorage.setItem("usuario", JSON.stringify(user));
 
     return response.data;
@@ -24,16 +24,21 @@ export async function login(dataUser) {
 
 export async function register(data) {
   try {
-    const { correo, contrasena } = data;
-    const response = await axios.post("/auth/register", {
+    const { correo, contrasena, nombre } = data;
+    const response = await axios.post("/usuarios", {
+      nombre,
       correo,
       contrasena,
+      rol:"alumno",
     });
-    return response.data;
+    return {success:true, data: response.data};
+
   } catch (error) {
-    return (
-      error.response?.data || { message: "Error al conectar con el servidor" }
-    );
+    console.log(error);
+    return {
+      success: false,
+      message: error.response?.data?.message || "Error al conectar con el servidor",
+    };
   }
 }
 
