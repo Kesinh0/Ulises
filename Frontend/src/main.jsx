@@ -17,11 +17,8 @@ import Terminos from "./pages/terminos.jsx";
 import Admin from "./pages/Administracion.jsx";
 import "./styles/App.css";
 import AuthProvider from "./contexts/auth/Auth.provider.jsx";
+import RutaProtegida from "./components/RutaProtegida.jsx";
 //AGREGAR DECORACION AL FINAL
-
-{
-  /*HAY QUE IMPLEMENTAR DE QUE NO TE DEJE METERTE A LAS OTRAS PAGINAS SI NO ESTAS LOGUEADO*/
-}
 
 const router = createBrowserRouter([
   {
@@ -42,11 +39,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/estudiante",
-        element: <Estudiante />,
+        element: (
+          <RutaProtegida rol="estudiante">
+            <Estudiante />
+          </RutaProtegida>
+        ),
       },
       {
         path: "/profesor",
-        element: <Profesor />,
+        element: (
+          <RutaProtegida rol="profesor">
+            <Profesor />
+          </RutaProtegida>
+        ),
       },
       {
         path: "/terminos",
@@ -54,7 +59,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/admin",
-        element: <Admin />,
+        element: (
+          <RutaProtegida rol="admin">
+            <Admin />
+          </RutaProtegida>
+        ),
       },
       {
         path: "/inscripciones",
