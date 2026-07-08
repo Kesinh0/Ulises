@@ -10,7 +10,7 @@ const AppDataSource = new DataSource({
 	host: process.env.DB_HOST || "localhost",
 	port: parseInt(process.env.DB_PORT || "5432"),
 	username: process.env.DB_USER || "postgres",
-	password: process.env.DB_PASSWORD || "2607",
+	password: process.env.DB_PASSWORD || "Lostilos1206!",
 	database: process.env.DB_NAME || "req",
 	synchronize: true,
 	logging: false,

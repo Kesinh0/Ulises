@@ -1,8 +1,7 @@
 import {useNavigate} from "react-router-dom";
-import { seleccionarProfesor } from "../services/usuarioService.js";
 const inscripcionService =  "../services/inscripcionService.js";
 import { useState, useEffect, useCallback } from 'react';
-import {ProfeManager} from "../components/ProfeManager.jsx";
+import ProfeManager from "../components/ProfeManager.jsx";
 
 const useProfesores = () => {
     const [profesores, setProfesores] = useState([]);
@@ -40,4 +39,8 @@ const useProfesores = () => {
 
     return { profesores, loading, error, fetchProfesores, eliminarProfesor };
 }
+const Inscripciones = () => {
+    return null;
+};
 
+export default Inscripciones;
