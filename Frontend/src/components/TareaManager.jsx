@@ -1,10 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getTareas, crearTarea } from "../services/tareaService";
 
-// temporal mientras conectamos
-const cursosMock = [
-    { id: 1, nombre: "Manejo Básico - Grupo A" },
-    { id: 2, nombre: "Manejo Avanzado - Grupo B" },
-];
+
 
 function TareaManager() {
     const [tareas, setTareas] = useState([]);
@@ -16,6 +13,21 @@ function TareaManager() {
         fechaEntrega: "",
     });
 
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    
+    useEffect(() => {
+        async function cargarTareas(){
+            const res = await getTareas();
+            if (res.success){
+                setTareas(res.data);
+            }else{
+                setError(res.message);
+            }
+        }
+        cargarTareas();
+    }, []);
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -25,62 +37,37 @@ function TareaManager() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLoading(true);
+        setError(false);
 
-        const nuevaTarea = {
-            id: Date.now(), // temporal
-            cursoId: Number(formData.cursoId),
-            titulo: formData.titulo,
-            descripcion: formData.descripcion,
-            material: formData.material,
-            fechaEntrega: formData.fechaEntrega,
-            fechaRegistro: new Date().toISOString().split("T")[0], // CURRENT_DATE
-        };
+        const res = await crearTarea(formData);
 
-        setTareas([...tareas, nuevaTarea]);
+        if(res.success) {
+            setTareas([...tareas, res.data]);
+            setFormData({ titulo: "", descripcion: "", material: "", fechaEntrega: "" });
+        }else{
+            setError(res.message);
+        }
 
-        setFormData({
-            cursoId: "",
-            titulo: "",
-            descripcion: "",
-            material: "",
-            fechaEntrega: "",
-        });
+        setLoading(false);
     };
 
     return (
         <div className="TareaManager">
             <h3>Crear tarea</h3>
+            {error && <p className="error-msg">{error}</p>}
+
             <form onSubmit={handleSubmit} className="tarea-form">
                 <label>
-                    Curso
+                    Titulo
                     <p></p> 
-                    <select
-                        name="cursoId"
-                        value={formData.cursoId}
-                        onChange={handleChange}
-                        required
-                        className="select-form"
-                    >
-                        <option value="">Selecciona un curso</option>
-                        {cursosMock.map((c) => (
-                            <option key={c.id} value={c.id}>
-                                {c.nombre}
-                            </option>
-                        ))}
-                    </select>
+                    <input type="text" name="titulo" value={formData.titulo} onChange={handleChange} maxLength={100} required />
                 </label>
 
                 <label>
                     Título
                     <p></p>
-                    <input
-                        type="text"
-                        name="titulo"
-                        value={formData.titulo}
-                        onChange={handleChange}
-                        maxLength={100}
-                        required
-                    />
+                    <textarea name="descripcion" value={formData.descripcion} onChange={handleChange} maxLength={255} />
                 </label>
 
                 <label>
@@ -97,28 +84,18 @@ function TareaManager() {
                 <label>
                     Material (link o referencia)
                     <p></p>
-                    <input
-                        type="text"
-                        name="material"
-                        value={formData.material}
-                        onChange={handleChange}
-                        maxLength={255}
-                    />
+                    <input type="text" name="material" value={formData.material} onChange={handleChange} maxLength={255} />
                 </label>
 
                 <label>
                     Fecha de entrega
                     <p></p>
-                    <input
-                        type="date"
-                        name="fechaEntrega"
-                        value={formData.fechaEntrega}
-                        onChange={handleChange}
-                        required
-                    />
+                    <input type="date" name="fechaEntrega" value={formData.fechaEntrega} onChange={handleChange} required />
                 </label>
 
-                <button type="submit">Crear tarea</button>
+                <button type="submit" disabled={loading}>
+                    {loading ? "Creando..." : "Crear tarea"}
+                </button>
             </form>
 
             <div className="tarea-list">
@@ -126,20 +103,15 @@ function TareaManager() {
                 {tareas.length === 0 && <p>No has creado tareas aún.</p>}
                 <ul>
                     {tareas.map((t) => {
-                        const curso = cursosMock.find((c) => c.id === t.cursoId);
-                        return (
-                            <li key={t.id}>
-                                <strong>{t.titulo}</strong> — {curso?.nombre}
-                                <br />
-                                Entrega: {t.fechaEntrega}
-                                {t.descripcion && <p>{t.descripcion}</p>}
-                                {t.material && (
-                                    <p>
-                                        Material: <a href={t.material} target="_blank" rel="noopener noreferrer">{t.material}</a>
-                                    </p>
-                                )}
-                            </li>
-                        );
+                        <li key={t.id}>
+                            <strong>{t.titulo}</strong>
+                            <br />
+                            Entrega: {t.fechaEntrega}
+                            {t.descripcion && <p>{t.descripcion}</p>}
+                            {t.material && (
+                                <p>Material: <a href={t.material} target="_blank" rel="noopener noreferrer">{t.material}</a></p>
+                            )}
+                        </li>
                     })}
                 </ul>
             </div>

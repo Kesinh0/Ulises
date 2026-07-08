@@ -18,7 +18,7 @@ function Login() {
         loadSession().then((sessionData) => {
           setUsuario(sessionData);
 
-          if (sessionData.rol === "estudiante") {
+          if (sessionData.rol === "alumno") {
             navigate("/estudiante");
           } else if (sessionData.rol === "profesor") {
             navigate("/profesor");
