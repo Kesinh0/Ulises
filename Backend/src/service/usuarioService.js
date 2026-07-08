@@ -4,6 +4,7 @@ const db = require("../conf/db");
 const usuario = require("../entities/usuarioE");
 const cleanUser = require("../utils/cleanUser");
 const usuarioRepository = db.getRepository(usuario);
+const { eliminarHorariosPorProfesor } = require("./horarioService");
 
 //crear un usuario para la db
 async function crearUsuario(usuarioData) {
@@ -108,6 +109,8 @@ async function actualizarUsuario(id, usuarioData) {
 
 //eliminar un usuario por id
 async function eliminarUsuario(id) {
+	await eliminarHorariosPorProfesor(id); // Eliminar los horarios asociados al profesor antes de eliminar el usuario
+
 	const resultado = await usuarioRepository.delete(id);
 
 	if (resultado.affected === 0) {

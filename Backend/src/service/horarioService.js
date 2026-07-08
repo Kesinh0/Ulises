@@ -104,10 +104,21 @@ const eliminarHorario = async (id) => {
 	return true; // El horario fue eliminado exitosamente
 };
 
+const eliminarHorariosPorProfesor = async (profesorId) => {
+	const resultado = await horarioRepository.delete({ usuarioId: profesorId });
+
+	if (resultado.affected === 0) {
+		return false; // No se encontraron horarios para eliminar
+	}
+
+	return true; // Los horarios fueron eliminados exitosamente
+};
+
 module.exports = {
 	crearHorario,
 	obtenerHorariosPorProfesor,
 	obtenerHorarioPorId,
 	actualizarHorario,
 	eliminarHorario,
+	eliminarHorariosPorProfesor,
 };
