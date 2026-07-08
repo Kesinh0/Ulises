@@ -3,53 +3,106 @@ import { useNavigate } from "react-router-dom";
 import estudiante from "../assets/Alumno.png";
 import HorarioEstudiante from "../components/HorarioEstudiante";
 import MaterialEstudiante from "../components/MaterialEstudiante";
+import { getInscripcionAlumno } from "../services/inscripcionService.js";
 
 const TABS = [
-    { id: "horario", label: "Mis Clases", component: HorarioEstudiante },
-    { id: "material", label: "Material", component: MaterialEstudiante },
+  { id: "horario", label: "Mis Clases", component: HorarioEstudiante },
+  { id: "material", label: "Material", component: MaterialEstudiante },
 ];
 
+const useInscripcion = () => {
+  const [inscripcion, setInscripcion] = useState({});
+
+  const fetchInscripcion = async () => {
+    try {
+      const response = await getInscripcionAlumno();
+      console.log("Respuesta de la API:", response);
+      if (response.success) {
+        setInscripcion(response.data);
+      } else {
+        console.error(
+          "Error al obtener la inscripción del alumno:",
+          response.message,
+        );
+      }
+    } catch (error) {
+      console.error("Error al obtener la inscripción del alumno:", error);
+    }
+  };
+
+  useState(() => {
+    fetchInscripcion();
+  }, []);
+
+  return { inscripcion, fetchInscripcion };
+};
+
 const Estudiante = () => {
-    const navigate = useNavigate();
-    const [tabActiva, setTabActiva] = useState(TABS[0].id);
-    const TabComponent = TABS.find((t) => t.id === tabActiva)?.component;
-    
+  const navigate = useNavigate();
+  const [tabActiva, setTabActiva] = useState(TABS[0].id);
+  const TabComponent = TABS.find((t) => t.id === tabActiva)?.component;
+  const { inscripcion } = useInscripcion();
 
-    const handleDarseDeBaja = () => {
-        const confirmar = window.confirm("¿Seguro que quieres darte de baja del curso?");
-        if (confirmar) {
-            
-            alert("Función pendiente de conectar con el backend.");
-        }
-    };
-    return (
-        <div className="right" id="right">
-            <h1>Estudiante</h1>
-            <div className="Estudiante">
-                <img src={estudiante} alt="estudiante" className="estudiante-image"/>
-                <p>
-                    Bienvenido a la página del estudiante.
-                </p>
-                <div className="tabs-nav">
-                    {TABS.map((tab) => (
-                        <button
-                            key={tab.id}
-                            className={`tab-btn ${tabActiva === tab.id ? "active" : ""}`}
-                            onClick={() => setTabActiva(tab.id)}
-                        >
-                            {tab.label}
-                        </button>
-                    ))}
-                </div>
+  console.log("Inscripción del alumno:", inscripcion);
 
-                <div className="tab-content">
-                    {TabComponent && <TabComponent/>}
-                </div>
-                <button className="baja-btn" onClick={handleDarseDeBaja}>Darse de baja</button>
-                <button onClick={() => navigate("/")}>Volver al inicio</button>
-                <button onClick={() => navigate("/inscripciones")}>Profesores</button>
-            </div>
+  const handleDarseDeBaja = () => {
+    const confirmar = window.confirm(
+      "¿Seguro que quieres darte de baja del curso?",
+    );
+    if (confirmar) {
+      alert("Función pendiente de conectar con el backend.");
+    }
+  };
+
+  return (
+    <div className="right" id="right">
+      <h1>Estudiante</h1>
+      <div className="Estudiante">
+        <img src={estudiante} alt="estudiante" className="estudiante-image" />
+        <p>Bienvenido a la página del estudiante.</p>
+        <div className="tabs-nav">
+          {TABS.map((tab) => (
+            <button
+              key={tab.id}
+              className={`tab-btn ${tabActiva === tab.id ? "active" : ""}`}
+              onClick={() => setTabActiva(tab.id)}
+            >
+              {tab.label}
+            </button>
+          ))}
         </div>
-    )
-}
-export default Estudiante
+
+        {inscripcion && (
+          <>
+            <div className="inscripcion-info">
+              <h2>Inscripción</h2>
+              <p>
+                <strong>Curso:</strong> {inscripcion.curso}
+              </p>
+              <p>
+                <strong>Profesor:</strong> {inscripcion.profesor}
+              </p>
+              <div className="tab-content">
+                {TabComponent && <TabComponent />}
+              </div>
+              <button className="baja-btn" onClick={handleDarseDeBaja}>
+                Darse de baja
+              </button>
+              <button onClick={() => navigate("/")}>Volver al inicio</button>
+            </div>
+          </>
+        )}
+
+        {!inscripcion && (
+          <>
+            <p>No estás inscrito en ningún curso actualmente.</p>
+            <button onClick={() => navigate("/inscripciones")}>
+              Profesores
+            </button>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+export default Estudiante;

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { listarProfesores } from "../services/usuarioService.js";
 import inscripcionService from "../services/inscripcionService.js";
@@ -37,6 +38,7 @@ const inscripcionManager = () => {
   const [horarios, setHorarios] = useState([]);
   const [loading, setLoading] = useState(true);
   const { usuario } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProfesores = async () => {
@@ -62,7 +64,8 @@ const inscripcionManager = () => {
     };
     try {
       await inscripcionService.crearInscripcion(inscripcionData);
-      console.log("Inscripción creada exitosamente");
+
+      navigate("/inscripciones");
     } catch (error) {
       console.error("Error al inscribirse al profesor:", error);
       alert("error al inscribirse al profesor: " + error.message);
@@ -92,7 +95,6 @@ const inscripcionManager = () => {
         const horariosData = horariosResponses.map(
           (response) => response.data.data,
         );
-        console.log("Horarios obtenidos:", horariosData);
         setHorarios(horariosData);
       } catch (error) {
         console.error(
@@ -107,7 +109,6 @@ const inscripcionManager = () => {
     }
   }, [profesores]);
 
-  console.log("Horarios obtenidos:", horarios);
   return (
     <div>
       <h2>Lista de Profesores</h2>
