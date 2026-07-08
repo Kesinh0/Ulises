@@ -5,7 +5,7 @@ export async function getHorarios() {
     const response = await axios.get('/horarios');
     return {
         success: true,
-        data: response.data,
+        data: response.data.data,
         message: response.data.message || 'Horarios obtenidos exitosamente',
     };
   } catch (error) {
@@ -23,7 +23,7 @@ export async function obtenerHorarioPorId(id) {
     const response = await axios.get(`/horarios/${id}`);
     return {
         success: true,
-        data: response.data,
+        data: response.data.data,
         message: response.data.message || 'Horario obtenido exitosamente',
     };
   } catch (error) {
@@ -41,7 +41,7 @@ export async function crearHorario(horarioData) {
     const response = await axios.post('/horarios', horarioData);
     return {
         success: true,
-        data: response.data,
+        data: response.data.data,
         message: response.data.message || 'Horario creado exitosamente',
     };
   } catch (error) {
@@ -56,10 +56,10 @@ export async function crearHorario(horarioData) {
 
 export async function actualizarHorario(id, horarioData) {
   try {
-    const response = await axios.put(`/horarios/${id}`, horarioData);
+    const response = await axios.patch(`/horarios/${id}`, horarioData);
     return {
         success: true,
-        data: response.data,
+        data: response.data.data,
         message: response.data.message || 'Horario actualizado exitosamente',
     };
   } catch (error) {
@@ -77,7 +77,7 @@ export async function borrarHorario(id) {
     const response = await axios.delete(`/horarios/${id}`);
     return {
         success: true,
-        data: response.data,
+        data: response.data.data,
         message: response.data.message || 'Horario eliminado exitosamente',
     };
   } catch (error) {
@@ -95,7 +95,7 @@ export async function obtenerHorariosPorProfesor(profesorId) {
     const response = await axios.get(`/horarios/profesor/${profesorId}`);
     return {
         success: true,
-        data: response.data,
+        data: response.data.data,
         message: response.data.message || 'Horarios del profesor obtenidos exitosamente',
     };
   } catch (error) {
