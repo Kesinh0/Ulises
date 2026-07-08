@@ -25,7 +25,7 @@ const obtenerHorarios = async () => {
       return [];
     }
 
-    return horariosRes.data.data;
+    return horariosRes.data;
   } catch (error) {
     console.error("Error al obtener los horarios:", error);
     return [];
@@ -38,7 +38,8 @@ function HorarioEstudiante() {
   useState(() => {
     const fetchHorarios = async () => {
       const horariosData = await obtenerHorarios();
-      setHorarios(horariosData);
+
+      setHorarios(horariosData ?? []);
     };
 
     fetchHorarios();

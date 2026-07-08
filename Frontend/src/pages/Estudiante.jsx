@@ -64,11 +64,7 @@ const Estudiante = () => {
   const [tabActiva, setTabActiva] = useState(TABS[0].id);
   const TabComponent = TABS.find((t) => t.id === tabActiva)?.component;
   const { inscripcion } = useInscripcion();
-  console.log("Inscripción obtenida:", inscripcion.profesorId);
-  const { profesor } = useProfesor(inscripcion.profesorId);
-
-  console.log("Inscripción del alumno:", inscripcion);
-  console.log("Profesor del curso:", profesor);
+  const { profesor } = useProfesor(inscripcion?.profesorId);
 
   const handleDarseDeBaja = () => {
     const confirmar = window.confirm(

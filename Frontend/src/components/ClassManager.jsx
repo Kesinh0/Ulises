@@ -41,7 +41,7 @@ function ClassManager() {
       if (horariosRes.success) {
         //horarios que son del profe
         setHorarios(
-          horariosRes.data.data.filter((h) => h.usuarioId === profesorActualId),
+          horariosRes.data.filter((h) => h.usuarioId === profesorActualId),
         );
       } else {
         setError(horariosRes.message);
@@ -157,7 +157,7 @@ function ClassManager() {
             return (
               <li key={h.id}>
                 <strong>
-                  {h.dia}:<br/> {h.horaInicio} - {h.horaFin}
+                  {h.dia}:<br /> {h.horaInicio} - {h.horaFin}
                 </strong>{" "}
                 {vehiculo?.marca} {vehiculo?.modelo}
               </li>

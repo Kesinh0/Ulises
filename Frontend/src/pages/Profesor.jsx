@@ -4,7 +4,6 @@ import { jwtDecode } from "jwt-decode";
 import cookies from "js-cookie";
 import profesor from "../assets/Profesor.png";
 import ClassManager from "../components/ClassManager";
-import MaterialManager from "../components/MaterialManager";
 import AlumnoManager from "../components/AlumnoManager";
 import useAuth from "../hooks/useAuth";
 
