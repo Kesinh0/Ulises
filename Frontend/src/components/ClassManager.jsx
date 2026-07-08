@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getVehiculos } from "../services/vehiculoService";
 import { getHorarios, crearHorario } from "../services/horarioService";
+import useAuth from "../hooks/useAuth";
 
 const DIAS = [
   "LUNES",
@@ -12,14 +13,16 @@ const DIAS = [
   "DOMINGO",
 ];
 
-const profesorActualId = 1; //lo cambiamos despues en la logica
-
 function ClassManager() {
   const [horarios, setHorarios] = useState([]);
   const [vehiculos, setVehiculos] = useState([]);
   const [formData, setFormData] = useState({ dia: "", vehiculoId: "" });
+  const [hora, setHora] = useState({ horaInicio: "", horaFin: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { usuario } = useAuth();
+
+  const profesorActualId = usuario?.id;
 
   useEffect(() => {
     async function cargarDatos() {
@@ -38,7 +41,7 @@ function ClassManager() {
       if (horariosRes.success) {
         //horarios que son del profe
         setHorarios(
-          horariosRes.data.filter((h) => h.usuarioId === profesorActualId),
+          horariosRes.data.data.filter((h) => h.usuarioId === profesorActualId),
         );
       } else {
         setError(horariosRes.message);
@@ -59,6 +62,8 @@ function ClassManager() {
     const nuevoHorario = {
       dia: formData.dia,
       vehiculoId: Number(formData.vehiculoId),
+      horaInicio: hora.horaInicio,
+      horaFin: hora.horaFin,
     };
     const res = await crearHorario(nuevoHorario);
 
@@ -112,6 +117,27 @@ function ClassManager() {
             ))}
           </select>
         </label>
+        <label>
+          Selecciona hora de inicio:
+          <input
+            type="time"
+            name="horaInicio"
+            value={hora.horaInicio}
+            onChange={(e) => setHora({ ...hora, horaInicio: e.target.value })}
+            required
+          />
+        </label>
+        <label>
+          Selecciona hora de fin:
+          <input
+            type="time"
+            name="horaFin"
+            value={hora.horaFin}
+            min={hora.horaInicio}
+            onChange={(e) => setHora({ ...hora, horaFin: e.target.value })}
+            required
+          />
+        </label>
         <p>
           <br />
         </p>
@@ -130,7 +156,10 @@ function ClassManager() {
             const vehiculo = vehiculos.find((v) => v.id === h.vehiculoId);
             return (
               <li key={h.id}>
-                <strong>{h.dia}</strong> — {vehiculo?.marca} {vehiculo?.modelo}
+                <strong>
+                  {h.dia} {h.horaInicio} - {h.horaFin}
+                </strong>{" "}
+                — {vehiculo?.marca} {vehiculo?.modelo}
               </li>
             );
           })}
