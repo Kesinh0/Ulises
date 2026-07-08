@@ -21,6 +21,12 @@ module.exports = new EntitySchema({
 				"DOMINGO",
 			],
 		},
+		horaInicio: {
+			type: "time",
+		},
+		horaFin: {
+			type: "time",
+		},
 		usuarioId: {
 			type: "int",
 		},
