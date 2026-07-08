@@ -6,6 +6,7 @@ import horarioService from '../services/horarioService.js';
 
 const inscripcionManager = () => {
     const [profesores, setProfesores] = useState([]);
+    const [horarios, setHorarios] = useState([]);
     const [loading, setLoading] = useState(true);
     const [action, setAction] = useState("inscribirse");
     const [expanded, setExpanded] = useState(false);
@@ -42,7 +43,7 @@ const inscripcionManager = () => {
         }
     };
 
-    const handleVerHorarios = async(profesorId) => {
+   /* const handleVerHorarios = async(profesorId) => {
         // Lógica para ver los horarios del profesor con el ID proporcionado
         console.log(`Ver horarios del profesor con ID: ${profesorId}`);
         try {
@@ -53,12 +54,29 @@ const inscripcionManager = () => {
             console.error("Error al obtener los horarios del profesor:", error);
             alert("Error al obtener los horarios del profesor: " + error.message);
         }
-    };
+    };*/
 
-    const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-    };
+    useEffect(() => {
+        const fetchHorarios = async () => {
+            try {
+                const horariosPromises = profesores.map((profesor) =>
+                    horarioService.obtenerHorariosPorProfesor(profesor.id)
+                );
+                const horariosResponses = await Promise.all(horariosPromises);
+                const horariosData = horariosResponses.map((response) => response.data);
+                 console.log("Horarios obtenidos:", horariosData);
+                setHorarios(horariosData.flat());
+            } catch (error) {
+                console.error("Error al obtener los horarios de los profesores:", error);
+            }
+        };
 
+        if (profesores.length > 0) {
+            fetchHorarios();
+        }
+    }, [profesores]);
+
+    console.log("Horarios obtenidos:", horarios);
     return (
         <div>
             <h2>Lista de Profesores</h2>
@@ -66,11 +84,18 @@ const inscripcionManager = () => {
                     {profesores.map((profesor) => (
                         <li key={profesor.id}>nombre: {profesor.nombre} <br></br> correo: {profesor.correo}
                         <br></br>
-                        <button onClick={() => handleVerHorarios(profesor.id)}>Ver horarios</button>
                         <button onClick={() => handleInscribirse(profesor.id)}>Inscribirse</button>
+                        <ul>
+                            {horarios.map((horario) => (
+                                  horario.usuarioId === profesor.id && (
+                                     <li key={horario.id}>
+                                       dia: {horario.dia} <br></br> hora: {horario.hora}
+                                    </li>
+                                )
+                            ))}
+                        </ul>
                     </li>
                     ))}
-
                 </ul>
         </div>
     );
