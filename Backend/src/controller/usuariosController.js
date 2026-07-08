@@ -110,10 +110,27 @@ const listarProfesores = async (req, res) => {
 	}
 };
 
+const eliminarUsuarioPorId = async (req, res) => {
+	try {
+		const usuarioId = req.params.id;
+
+		const eliminado = await usuarioService.eliminarUsuario(usuarioId);
+
+		if (!eliminado) {
+			return sendError(res, "Usuario no encontrado", 404);
+		}
+
+		sendSuccess(res, null, "Usuario eliminado exitosamente", 200);
+	} catch (error) {
+		sendError(res, "Error al eliminar el usuario", 500);
+	}
+};
+
 module.exports = {
 	crearUsuario,
 	obtenerPerfil,
 	actualizarUsuario,
 	eliminarUsuario,
 	listarProfesores,
+	eliminarUsuarioPorId,
 };

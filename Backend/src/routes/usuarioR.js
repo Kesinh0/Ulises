@@ -18,4 +18,10 @@ router.delete("/perfil", verificarAuth, usuarioController.eliminarUsuario);
 //listar profesores
 router.get("/profesores", usuarioController.listarProfesores);
 
+router.delete(
+	"/:id",
+	verificarRol("admin"),
+	usuarioController.eliminarUsuarioPorId,
+);
+
 module.exports = router;
