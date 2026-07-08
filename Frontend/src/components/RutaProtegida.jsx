@@ -8,6 +8,7 @@ export default function RutaProtegida({ children, rol }) {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(usuario);
     if (!cargando) {
       if (!usuario) {
         navigate("/login");

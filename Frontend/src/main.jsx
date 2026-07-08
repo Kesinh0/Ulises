@@ -40,7 +40,7 @@ const router = createBrowserRouter([
       {
         path: "/estudiante",
         element: (
-          <RutaProtegida rol="estudiante">
+          <RutaProtegida rol="alumno">
             <Estudiante />
           </RutaProtegida>
         ),
