@@ -29,7 +29,7 @@ const Admin = () => {
 
       <div className="Admin">
         <img src={admin} alt="admin" className="admin-image" />
-        <p>Bienvenido (admin)</p>
+        
         <div className="tabs-nav">
           {TABS.map((tab) => (
             <button

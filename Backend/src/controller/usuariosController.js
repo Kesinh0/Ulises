@@ -97,6 +97,7 @@ const eliminarUsuario = async (req, res) => {
 
 		sendSuccess(res, null, "Usuario eliminado exitosamente", 200);
 	} catch (error) {
+		
 		sendError(res, "Error al eliminar el usuario", 500);
 	}
 };
@@ -122,6 +123,7 @@ const eliminarUsuarioPorId = async (req, res) => {
 
 		sendSuccess(res, null, "Usuario eliminado exitosamente", 200);
 	} catch (error) {
+		console.log(error);
 		sendError(res, "Error al eliminar el usuario", 500);
 	}
 };
