@@ -21,6 +21,9 @@ router.get("/profesores", usuarioController.listarProfesores);
 
 router.get("/alumnos", usuarioController.listarAlumnos);
 
+//obtener un usuario por id
+router.get("/:id", usuarioController.obtenerUsuarioPorId);
+
 router.delete(
 	"/:id",
 	verificarRol("admin"),

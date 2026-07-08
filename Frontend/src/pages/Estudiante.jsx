@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import estudiante from "../assets/Alumno.png";
 import HorarioEstudiante from "../components/HorarioEstudiante";
@@ -31,11 +31,32 @@ const useInscripcion = () => {
     }
   };
 
-  useState(() => {
+  useEffect(() => {
     fetchInscripcion();
   }, []);
 
   return { inscripcion, fetchInscripcion };
+};
+
+const useProfesor = (profesorId) => {
+  const [profesor, setProfesor] = useState({});
+
+  const fetchProfesor = async () => {
+    if (!profesorId) return;
+
+    try {
+      const response = await usuarioService.obtenerUsuarioPorId(profesorId);
+      setProfesor(response);
+    } catch (error) {
+      console.error("Error al obtener el profesor:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProfesor();
+  }, [profesorId]);
+
+  return { profesor, fetchProfesor };
 };
 
 const Estudiante = () => {
@@ -43,29 +64,34 @@ const Estudiante = () => {
   const [tabActiva, setTabActiva] = useState(TABS[0].id);
   const TabComponent = TABS.find((t) => t.id === tabActiva)?.component;
   const { inscripcion } = useInscripcion();
-  const profesor = usuarioService.obtenerUsuarioPorId(inscripcion.profesorId);
+  console.log("Inscripción obtenida:", inscripcion.profesorId);
+  const { profesor } = useProfesor(inscripcion.profesorId);
 
   console.log("Inscripción del alumno:", inscripcion);
+  console.log("Profesor del curso:", profesor);
 
   const handleDarseDeBaja = () => {
-    const confirmar = window.confirm("¿Seguro que quieres darte de baja del curso?");
-        if (confirmar) {
-            inscripcionService.eliminarInscripcion(inscripcion.alumnoId)
-                .then((response) => {
-                    if (response.success) {
-                        alert("Te has dado de baja del curso exitosamente.");
-                        window.location.reload();
-                    } else {
-                        alert("Error al darse de baja: " + response.message);
-                    }
-                })
-                .catch((error) => {
-                    console.error("Error al darse de baja:", error);
-                    alert("Error al darse de baja. Por favor, inténtalo de nuevo.");
-                });
-        } else {
-            alert("No se ha realizado ninguna acción.");
-        }
+    const confirmar = window.confirm(
+      "¿Seguro que quieres darte de baja del curso?",
+    );
+    if (confirmar) {
+      inscripcionService
+        .eliminarInscripcion(inscripcion.alumnoId)
+        .then((response) => {
+          if (response.success) {
+            alert("Te has dado de baja del curso exitosamente.");
+            window.location.reload();
+          } else {
+            alert("Error al darse de baja: " + response.message);
+          }
+        })
+        .catch((error) => {
+          console.error("Error al darse de baja:", error);
+          alert("Error al darse de baja. Por favor, inténtalo de nuevo.");
+        });
+    } else {
+      alert("No se ha realizado ninguna acción.");
+    }
   };
 
   return (
@@ -91,7 +117,8 @@ const Estudiante = () => {
             <div className="inscripcion-info">
               <h2>Inscripción</h2>
               <p>
-                <strong>Profesor:</strong> {profesor?.nombre || "Profesor no encontrado"}
+                <strong>Profesor:</strong>{" "}
+                {profesor?.nombre || "Profesor no encontrado"}
               </p>
               <div className="tab-content">
                 {TabComponent && <TabComponent />}
@@ -99,7 +126,6 @@ const Estudiante = () => {
               <button className="baja-btn" onClick={handleDarseDeBaja}>
                 Darse de baja
               </button>
-              
             </div>
           </>
         )}
@@ -107,11 +133,10 @@ const Estudiante = () => {
         {!inscripcion && (
           <>
             <p>No estás inscrito en ningún curso actualmente.</p>
-            
           </>
         )}
         <button onClick={() => navigate("/inscripciones")}>
-              Inscribirse a un curso
+          Inscribirse a un curso
         </button>
         <button onClick={() => navigate("/")}>Volver al inicio</button>
       </div>

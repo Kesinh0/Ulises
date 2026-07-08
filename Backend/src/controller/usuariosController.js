@@ -97,7 +97,6 @@ const eliminarUsuario = async (req, res) => {
 
 		sendSuccess(res, null, "Usuario eliminado exitosamente", 200);
 	} catch (error) {
-		
 		sendError(res, "Error al eliminar el usuario", 500);
 	}
 };
@@ -137,6 +136,23 @@ const eliminarUsuarioPorId = async (req, res) => {
 	}
 };
 
+const obtenerUsuarioPorId = async (req, res) => {
+	try {
+		const usuarioId = req.params.id;
+
+		const usuario = await usuarioService.obtenerUsuarioPorId(usuarioId);
+
+		if (!usuario) {
+			return sendError(res, "Usuario no encontrado", 404);
+		}
+
+		sendSuccess(res, usuario, "Usuario obtenido exitosamente", 200);
+	} catch (error) {
+		console.error(error);
+		sendError(res, "Error al obtener el usuario", 500);
+	}
+};
+
 module.exports = {
 	crearUsuario,
 	obtenerPerfil,
@@ -145,4 +161,5 @@ module.exports = {
 	listarProfesores,
 	listarAlumnos,
 	eliminarUsuarioPorId,
+	obtenerUsuarioPorId,
 };

@@ -27,6 +27,7 @@ export async function obtenerPerfil() {
 export async function obtenerUsuarioPorId(id) {
 	try {
 		const token = cookies.get("jwt-auth", { path: "/" });
+		console.log("Token obtenido:", token); // Agrega este log para verificar el token
 		if (!token) {
 			return null;
 		}
@@ -63,8 +64,6 @@ export async function listarProfesores() {
 		return null;
 	}
 }
-
-
 
 export async function listarAlumnos() {
 	try {
@@ -126,22 +125,24 @@ export async function eliminarPerfil() {
 }
 
 export async function crearProfesor(data) {
-  try {
-    const { correo, contrasena, nombre } = data;
-    const response = await axios.post("/usuarios", {
-      nombre,
-      correo,
-      contrasena,
-      rol: "profesor",
-    });
-    return { success: true, data: response.data.data };
-  } catch (error) {
-    console.log(error);
-    return {
-      success: false,
-      message: error.response?.data?.message || "Error al conectar con el servidor",
-    };
-  }
+	try {
+		const { correo, contrasena, nombre } = data;
+		const response = await axios.post("/usuarios", {
+			nombre,
+			correo,
+			contrasena,
+			rol: "profesor",
+		});
+		return { success: true, data: response.data.data };
+	} catch (error) {
+		console.log(error);
+		return {
+			success: false,
+			message:
+				error.response?.data?.message ||
+				"Error al conectar con el servidor",
+		};
+	}
 }
 
 export async function eliminarUsuario(id) {
@@ -162,18 +163,19 @@ export async function eliminarUsuario(id) {
 		console.error("Error al eliminar el usuario:", error);
 		return {
 			success: false,
-			message: error.response?.data?.message || "Error al eliminar el usuario",
+			message:
+				error.response?.data?.message || "Error al eliminar el usuario",
 		};
 	}
 }
 
 export default {
-  obtenerPerfil,
-  listarProfesores,
-  listarAlumnos,
-  obtenerUsuarioPorId,
-  actualizarPerfil,
-  eliminarPerfil,
-  crearProfesor,
-  eliminarUsuario,
+	obtenerPerfil,
+	listarProfesores,
+	listarAlumnos,
+	obtenerUsuarioPorId,
+	actualizarPerfil,
+	eliminarPerfil,
+	crearProfesor,
+	eliminarUsuario,
 };
