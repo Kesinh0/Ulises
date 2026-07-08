@@ -87,7 +87,7 @@ const obtenerInscripcionPorAlumno = async (req, res) => {
 
 const eliminarInscripcion = async (req, res) => {
 	try {
-		const { alumnoId } = req.usuario.id;
+		const  alumnoId = req.usuario.id;
 		await inscripcionService.eliminarInscripcion(alumnoId);
 		return sendSuccess(res, null, "Inscripción eliminada exitosamente");
 	} catch (err) {

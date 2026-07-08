@@ -82,7 +82,7 @@ export const crearInscripcion = async (inscripcionData) => {
 
 export const eliminarInscripcion = async (id) => {
 	try {
-		const response = await axios.delete(`/inscripciones/${id}`);
+		const response = await axios.delete(`/inscripciones/usuario/${id}`);
 		return {
 			success: true,
 			data: response.data,
@@ -105,4 +105,5 @@ export default {
 	getInscripciones,
 	crearInscripcion,
 	eliminarInscripcion,
+  getInscripcionAlumno,
 };
