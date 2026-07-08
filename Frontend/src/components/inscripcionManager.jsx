@@ -8,6 +8,7 @@ const inscripcionManager = () => {
     const [profesores, setProfesores] = useState([]);
     const [loading, setLoading] = useState(true);
     const [action, setAction] = useState("inscribirse");
+    const [expanded, setExpanded] = useState(false);
     const { usuario } = useAuth();
 
     useEffect(() => {
@@ -48,11 +49,14 @@ const inscripcionManager = () => {
             const response = await horarioService.obtenerHorariosPorProfesor(profesorId);
             console.log("Horarios obtenidos:", response);
             return response.data;
-            // Aquí puedes mostrar los horarios en la interfaz de usuario según tus necesidades
         } catch (error) {
             console.error("Error al obtener los horarios del profesor:", error);
             alert("Error al obtener los horarios del profesor: " + error.message);
         }
+    };
+
+    const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
     };
 
     return (
