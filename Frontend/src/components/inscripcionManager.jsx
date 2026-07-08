@@ -72,19 +72,6 @@ const inscripcionManager = () => {
     }
   };
 
-  /* const handleVerHorarios = async(profesorId) => {
-        // Lógica para ver los horarios del profesor con el ID proporcionado
-        console.log(`Ver horarios del profesor con ID: ${profesorId}`);
-        try {
-            const response = await horarioService.obtenerHorariosPorProfesor(profesorId);
-            console.log("Horarios obtenidos:", response);
-            return response.data;
-        } catch (error) {
-            console.error("Error al obtener los horarios del profesor:", error);
-            alert("Error al obtener los horarios del profesor: " + error.message);
-        }
-    };*/
-
   useEffect(() => {
     const fetchHorarios = async () => {
       try {
