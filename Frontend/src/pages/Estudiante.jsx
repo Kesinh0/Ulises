@@ -4,6 +4,7 @@ import estudiante from "../assets/Alumno.png";
 import HorarioEstudiante from "../components/HorarioEstudiante";
 import MaterialEstudiante from "../components/MaterialEstudiante";
 import inscripcionService from "../services/inscripcionService.js";
+import usuarioService from "../services/usuarioService.js";
 
 const TABS = [
   { id: "horario", label: "Mis Clases", component: HorarioEstudiante },
@@ -42,6 +43,7 @@ const Estudiante = () => {
   const [tabActiva, setTabActiva] = useState(TABS[0].id);
   const TabComponent = TABS.find((t) => t.id === tabActiva)?.component;
   const { inscripcion } = useInscripcion();
+  const profesor = usuarioService.obtenerUsuarioPorId(inscripcion.profesorId);
 
   console.log("Inscripción del alumno:", inscripcion);
 
@@ -89,10 +91,7 @@ const Estudiante = () => {
             <div className="inscripcion-info">
               <h2>Inscripción</h2>
               <p>
-                <strong>Curso:</strong> {inscripcion.curso}
-              </p>
-              <p>
-                <strong>Profesor:</strong> {inscripcion.profesor}
+                <strong>Profesor:</strong> {profesor?.nombre || "Profesor no encontrado"}
               </p>
               <div className="tab-content">
                 {TabComponent && <TabComponent />}

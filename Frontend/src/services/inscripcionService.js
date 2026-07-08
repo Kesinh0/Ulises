@@ -101,6 +101,30 @@ export const eliminarInscripcion = async (id) => {
 	}
 };
 
+export const obtenerInscripcionesPorProfesor = async (profesorId) => {
+  try {
+    const response = await axios.get(`/inscripciones/profesor/${profesorId}`);
+    return {
+      success: true,
+      data: response.data,
+      message:
+        response.data.message || "Inscripciones obtenidas exitosamente",
+    };
+  } catch (error) {
+    console.error(
+      `Error al obtener las inscripciones del profesor con ID ${profesorId}:`,
+      error
+    );
+    return {
+      success: false,
+      data: null,
+      message:
+        error.response?.data?.message ||
+        "Error al obtener las inscripciones del profesor",
+    };
+  }
+};
+
 export default {
 	getInscripciones,
 	crearInscripcion,

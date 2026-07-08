@@ -1,5 +1,6 @@
 import axios from "./rootService.js";
 import cookies from "js-cookie";
+import inscripcionService from "./inscripcionService.js";
 
 export async function obtenerPerfil() {
 	try {
@@ -23,6 +24,26 @@ export async function obtenerPerfil() {
 	}
 }
 
+export async function obtenerUsuarioPorId(id) {
+	try {
+		const token = cookies.get("jwt-auth", { path: "/" });
+		if (!token) {
+			return null;
+		}
+
+		const response = await axios.get(`/usuarios/${id}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+
+		return response.data.data; // Devuelve el usuario por ID
+	} catch (error) {
+		console.error(`Error al obtener el usuario con ID ${id}:`, error);
+		return null;
+	}
+}
+
 export async function listarProfesores() {
 	try {
 		const token = cookies.get("jwt-auth", { path: "/" });
@@ -42,6 +63,8 @@ export async function listarProfesores() {
 		return null;
 	}
 }
+
+
 
 export async function listarAlumnos() {
 	try {
@@ -148,6 +171,7 @@ export default {
   obtenerPerfil,
   listarProfesores,
   listarAlumnos,
+  obtenerUsuarioPorId,
   actualizarPerfil,
   eliminarPerfil,
   crearProfesor,
