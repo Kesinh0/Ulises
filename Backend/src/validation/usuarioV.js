@@ -1,10 +1,15 @@
 const Joi = require("joi");
 
 const usuarioSchema = Joi.object({
-	nombre: Joi.string().alphanum().min(3).max(30).required().messages({
-		invalid: "Nombre invalido",
-		empty: "El nombre no puede estar vacio",
-	}),
+	nombre: Joi.string()
+		.regex(/^[a-zA-Z\s]+$/)
+		.min(3)
+		.max(30)
+		.required()
+		.messages({
+			invalid: "Nombre invalido",
+			empty: "El nombre no puede estar vacio",
+		}),
 
 	correo: Joi.string()
 		.email({ tlds: { allow: false } })
@@ -26,7 +31,11 @@ const usuarioSchema = Joi.object({
 });
 
 const updateUsuarioSchema = Joi.object({
-	nombre: Joi.string().alphanum().min(3).max(30).optional(),
+	nombre: Joi.string()
+		.regex(/^[a-zA-Z\s]+$/)
+		.min(3)
+		.max(30)
+		.optional(),
 	correo: Joi.string()
 		.email({ tlds: { allow: false } })
 		.optional(),
