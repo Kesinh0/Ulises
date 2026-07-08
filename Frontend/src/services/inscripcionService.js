@@ -3,7 +3,7 @@ import listarProfesores from './usuarioService.js';
 
 export const getInscripciones = async () => {
   try {
-    const response = await axios.get('/inscripciones');
+    const response = await axios.get('/profesores');
     return {
         success: true,
         data: response.data,
@@ -53,4 +53,10 @@ export const eliminarInscripcion = async (id) => {
         message: error.response?.data?.message || 'Error al eliminar la inscripción',
     };
   }
+};
+
+export default {
+  getInscripciones,
+  crearInscripcion,
+  eliminarInscripcion,
 };

@@ -1,65 +1,45 @@
-import { useNavigate } from "react-router-dom";
-const inscripcionService = "../services/inscripcionService.js";
-import { useState, useEffect, useCallback } from "react";
-import ProfeManager from "../components/ProfeManager.jsx";
+import {useNavigate} from "react-router-dom";
+import inscripcionService from  "../services/inscripcionService.js";
+import { useState, useEffect, useCallback } from 'react';
+import inscripcionManager from "../components/inscripcionManager.jsx";
+import usuarioService from "../services/usuarioService.js";
 
-const useProfesores = () => {
-  const [profesores, setProfesores] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const fetchProfesores = useCallback(async () => {
-    try {
-      setLoading(true);
-      const response = await seleccionarProfesor();
-      if (response.success) {
-        setProfesores(response.data);
-      } else {
-        setError(response.message);
-      }
-    } catch (err) {
-      setError(err.message || "Error al obtener los profesores");
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  const eliminarProfesor = async (id) => {
-    try {
-      const response = await inscripcionService.eliminarInscripcion(id);
-      if (response.success) {
-        setProfesores((prevProfesores) =>
-          prevProfesores.filter((profesor) => profesor.id !== id),
-        );
-      } else {
-        setError(response.message);
-      }
-    } catch (err) {
-      setError(err.message || "Error al eliminar el profesor");
-    }
-  };
-
-  return { profesores, loading, error, fetchProfesores, eliminarProfesor };
-};
+const tabla = [
+  { id: "profes", 
+  label: "Administracion Profesores", 
+  component: inscripcionManager },
+];
 
 const Inscripciones = () => {
-  const { profesores, loading, error, fetchProfesores, eliminarProfesor } =
-    useProfesores();
+    const navigate = useNavigate();
+    const [tabActiva, setTabActiva] = useState(tabla[0].id);
+    const TabComponent = tabla.find((t) => t.id === tabActiva)?.component;
+    const fetchProfesores = useCallback(async () => {
+        try {
+            const response = await usuarioService.listarProfesores();
+            console.log("Profesores obtenidos:", response);
+        } catch (error) {
+            console.error("Error al obtener los profesores:", error);
+        }
+    }, []);
 
-  useEffect(() => {
-    fetchProfesores();
-  }, [fetchProfesores]);
+    useEffect(() => {
+        fetchProfesores();
+    }, [fetchProfesores]);
 
-  return (
-    <div>
-      <h1>Lista de Profesores</h1>
-      {loading && <p>Cargando...</p>}
-      {error && <p>Error: {error}</p>}
-      {!loading && !error && (
-        <ProfeManager profesores={profesores} onEliminar={eliminarProfesor} />
-      )}
-    </div>
-  );
+    return (
+        <div className="right" id="right">
+            <h1>Profesores</h1>
+            <div className="Inscripciones">
+                <div className="tabs-nav">
+                </div>
+                <div className="tab-content">
+                    {TabComponent && <TabComponent />}
+                </div>
+                <button onClick={() => navigate("/estudiante")}>Volver al inicio</button>
+            </div>
+        </div>
+    );
 };
 
 export default Inscripciones;

@@ -89,3 +89,30 @@ export async function borrarHorario(id) {
     };
   }
 }
+
+export async function obtenerHorariosPorProfesor(profesorId) {
+  try {
+    const response = await axios.get(`/horarios/profesor/${profesorId}`);
+    return {
+        success: true,
+        data: response.data,
+        message: response.data.message || 'Horarios del profesor obtenidos exitosamente',
+    };
+  } catch (error) {
+    console.error(`Error al obtener los horarios del profesor con ID ${profesorId}:`, error);
+    return {
+        success: false,
+        data: null,
+        message: error.response?.data?.message || 'Error al obtener los horarios del profesor',
+    };
+  }
+}
+
+export default {
+  getHorarios,
+  obtenerHorarioPorId,
+  crearHorario,
+  actualizarHorario,
+  borrarHorario,
+  obtenerHorariosPorProfesor,
+};

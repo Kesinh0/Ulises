@@ -8,6 +8,7 @@ const db = require("./conf/db");
 const vehiculoR = require("./routes/vehiculoR");
 const horarioR = require("./routes/horarioR");
 const usuarioR = require("./routes/usuarioR");
+const inscripcionR = require("./routes/inscripcionR");
 const authR = require("./routes/authR");
 
 const app = express();
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use("/vehiculos", vehiculoR);
 app.use("/horarios", horarioR);
 app.use("/usuarios", usuarioR);
+app.use("/inscripciones", inscripcionR);
 app.use("/auth", authR);
 
 app.get("/", (req, res) => {

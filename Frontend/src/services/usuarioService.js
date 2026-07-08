@@ -124,3 +124,11 @@ export async function eliminarUsuario(id) {
 	}
 }
 
+export default {
+  obtenerPerfil,
+  listarProfesores,
+  actualizarPerfil,
+  eliminarPerfil,
+  crearProfesor,
+  eliminarUsuario,
+};

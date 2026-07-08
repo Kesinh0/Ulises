@@ -47,6 +47,7 @@ const Estudiante = () => {
                 </div>
                 <button className="baja-btn" onClick={handleDarseDeBaja}>Darse de baja</button>
                 <button onClick={() => navigate("/")}>Volver al inicio</button>
+                <button onClick={() => navigate("/inscripciones")}>Profesores</button>
             </div>
         </div>
     )
