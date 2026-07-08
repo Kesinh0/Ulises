@@ -17,6 +17,17 @@ body{
     color: white;
 }
 
+li{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 12px;
+    background-color: #2a2430;
+    border: 1px solid #4a3d5c;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    overflow-wrap: break-word; 
+}
 
 
 button {
